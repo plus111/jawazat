@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">texttospeech</string>
+
+    <string name="mic_text">tap_mic_and_speak</string>
+
+    <string name="mic_textbtn1">English</string>
+
+    <string name="mic_textbtn2">Arabic</string>
+
+    <string name="mic_textbtn3">French</string>
+
+    <string name="mic_textbtn4" >Chinese</string>
+</resources>

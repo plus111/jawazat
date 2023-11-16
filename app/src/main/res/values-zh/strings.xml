@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">texttospeech</string>
+
+    <string name="mic_text" > 点击麦克风并说话 </string>
+
+    <string name="mic_textbtn1" >英语</string>
+
+    <string name="mic_textbtn2" >阿拉伯</string>
+
+    <string name="mic_textbtn3" >法语</string>
+
+    <string name="mic_textbtn4" >中国人</string>
+
+</resources>

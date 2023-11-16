@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">texttospeech</string>
+
+    <string name="mic_text" >appuyez sur le micro et parlez</string>
+
+    <string name="mic_textbtn1" >Anglais</string>
+
+    <string name="mic_textbtn2" >Arabe</string>
+
+    <string name="mic_textbtn3" >Français</string>
+
+    <string name="mic_textbtn4" >Chinois</string>
+</resources>
