@@ -56,9 +56,10 @@ public class MainActivity extends AppCompatActivity {
     Button Arabicbtn;
     Button Frenchbtn;
     Button Chinesebtn;
+    private SpeechRecognizer speechRecognizer;
 
     private static final String SELECTED_LANGUAGE = "Locale.Helper.Selected.Language";
-
+    final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,20 +72,22 @@ public class MainActivity extends AppCompatActivity {
         Chinesebtn = findViewById(R.id.lang_chinesebtn);
 
 
-        LanguageManager lang = new LanguageManager(this);
-
         Englishbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lang.updateResource("en");
-                recreate();
+//                lang.updateResource("en");
+//                recreate();
+
+
                 // url to post our data
                 String url = "http://192.168.100.67:5000/sentence";
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
                 // Move to another page using Intent
                 Intent intent = new Intent(MainActivity.this, Listen.class);
+                intent.putExtra("langg","en-US");
                 startActivity(intent);
+
                 StringRequest request = new StringRequest(
                         Request.Method.POST,
                         url,
@@ -112,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                             public byte[] getBody() {
                                 JSONObject jsonBody = new JSONObject();
                                 try {
-                                    jsonBody.put("lang", "en");
+                                    jsonBody.put("lang", "en-US");
                                     jsonBody.put("sentence", "welcoming");
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -126,18 +129,18 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
         Arabicbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lang.updateResource("ar");
-                recreate();
+
+
                 // url to post our data
                 String url = "http://192.168.100.67:5000/sentence";
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
                 // Move to another page using Intent
                 Intent intent = new Intent(MainActivity.this, Listen.class);
+                intent.putExtra("langg","ar-SA");
                 startActivity(intent);
                 StringRequest request = new StringRequest(
                         Request.Method.POST,
@@ -166,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                     public byte[] getBody() {
                         JSONObject jsonBody = new JSONObject();
                         try {
-                            jsonBody.put("lang", "ar");
+                            jsonBody.put("lang", "ar-SA");
                             jsonBody.put("sentence", "welcoming");
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -179,19 +182,20 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
         Frenchbtn.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            lang.updateResource("fr");
-            recreate();
+//            lang.updateResource("fr");
+//            recreate();
+
+
             // url to post our data
             String url = "http://192.168.100.67:5000/sentence";
             RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
             // Move to another page using Intent
             Intent intent = new Intent(MainActivity.this, Listen.class);
+            intent.putExtra("langg","fr-FR");
             startActivity(intent);
 
             StringRequest request = new StringRequest(
@@ -221,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
                 public byte[] getBody() {
                     JSONObject jsonBody = new JSONObject();
                     try {
-                        jsonBody.put("lang", "fr");
+                        jsonBody.put("lang", "fr-FR");
                         jsonBody.put("sentence", "welcoming");
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -238,15 +242,18 @@ public class MainActivity extends AppCompatActivity {
         Chinesebtn.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            lang.updateResource("zh");
-            recreate();
+//            lang.updateResource("zh");
+//            recreate();
+
             // url to post our data
             String url = "http://192.168.100.67:5000/sentence";
             RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
             // Move to another page using Intent
             Intent intent = new Intent(MainActivity.this, Listen.class);
+            intent.putExtra("langg","zh-tw");
             startActivity(intent);
+
             StringRequest request = new StringRequest(
                     Request.Method.POST,
                     url,

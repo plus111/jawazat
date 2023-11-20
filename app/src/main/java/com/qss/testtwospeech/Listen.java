@@ -13,21 +13,38 @@ import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Objects;
 
 public class Listen extends AppCompatActivity {
 
     private ImageView iv_mic;
     private EditText tv_Speech_to_text;
+    private TextView answerText;
     private SpeechRecognizer speechRecognizer;
     private static final int REQUEST_CODE_SPEECH_INPUT = 1;
+    LanguageManager lang = new LanguageManager(this);
+    String selectedLanguage;
+//    = Objects.requireNonNull(getIntent().getExtras()).getString("langg");
 
 
     @SuppressLint("MissingInflatedId")
@@ -38,6 +55,7 @@ public class Listen extends AppCompatActivity {
 
         iv_mic = findViewById(R.id.iv_mic);
         tv_Speech_to_text = findViewById(R.id.tv_speech_to_text);
+        answerText = findViewById(R.id.answer);
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
 
 
@@ -49,7 +67,16 @@ public class Listen extends AppCompatActivity {
 
         final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
+
+        selectedLanguage = Objects.requireNonNull(getIntent().getExtras()).getString("langg");
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, selectedLanguage);
+        Log.d("speechRecognizerIntent", "speechRecognizerIntent: " + speechRecognizerIntent);
+
+        //calling the function
+//        answerQues();
+
+
 
 
         speechRecognizer.setRecognitionListener(new RecognitionListener() {
@@ -60,7 +87,10 @@ public class Listen extends AppCompatActivity {
             @Override
             public void onBeginningOfSpeech() {
                 tv_Speech_to_text.setText("");
-                tv_Speech_to_text.setHint("Listening...");
+                tv_Speech_to_text.setHint(getString(R.string.mic_textt));
+
+
+
             }
 
             @Override
@@ -84,6 +114,9 @@ public class Listen extends AppCompatActivity {
                 iv_mic.setImageResource(R.drawable.mic);
                 ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 tv_Speech_to_text.setText(data.get(0));
+
+                //calling the functions
+                sendingAns(String.valueOf(data.get(0)), selectedLanguage);
             }
 
             @Override
@@ -97,13 +130,13 @@ public class Listen extends AppCompatActivity {
             }
         });
 
-
         iv_mic.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP){
                     speechRecognizer.stopListening();
+
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
                     iv_mic.setImageResource(R.drawable.mic);
@@ -119,7 +152,6 @@ public class Listen extends AppCompatActivity {
         speechRecognizer.destroy();
     }
 
-
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ActivityCompat.requestPermissions(this,new String[]{android.Manifest.permission.RECORD_AUDIO}, REQUEST_CODE_SPEECH_INPUT);
@@ -134,4 +166,62 @@ public class Listen extends AppCompatActivity {
         }
 
     }
+
+    public void sendingAns(String tv_Speech_to_text,String selectedLanguage){
+        String url = "http://192.168.100.67:5000/sentence";
+        RequestQueue queue = Volley.newRequestQueue(Listen.this);
+
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                url,
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i("TAG", "onResponse: ");
+
+                        try {
+
+//                            String Ans = response.("responsee", "");
+                            answerText.setText(response);
+                            Log.d("SuccessResponse2", "onResponse: ");
+
+                        } catch (Exception e) {
+                            Log.e("Error", "onErrorResponse: ", e);
+                            throw new RuntimeException(e);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle error
+                        Log.e("Error", "onErrorResponse: ", error);
+                    }
+                }) {
+            @Override
+            public String getBodyContentType() {
+                Log.d("TAG", "getBodyContentType: ");
+                return "application/json";
+            }
+
+            @Override
+            public byte[] getBody() {
+                JSONObject jsonBody = new JSONObject();
+                try {
+                    jsonBody.put("lang", selectedLanguage);
+                    Log.d("chosenlang", "getBody: ");
+                    jsonBody.put("sentence", "" + tv_Speech_to_text);
+                    Log.d("sentsentence", "sentence: ");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return jsonBody.toString().getBytes();
+            }
+        };
+
+        queue.add(request);
+
+    }
+
+
 }

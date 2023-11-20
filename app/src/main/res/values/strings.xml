@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">texttospeech</string>
 
-    <string name="mic_text">tap_mic_and_speak</string>
+    <string name="mic_text">tap mic and speak</string>
 
     <string name="mic_textbtn1">English</string>
 
@@ -10,4 +10,6 @@
     <string name="mic_textbtn3">Français</string>
 
     <string name="mic_textbtn4" >中国人</string>
+
+    <string name="mic_textt">Listening...</string>
 </resources>

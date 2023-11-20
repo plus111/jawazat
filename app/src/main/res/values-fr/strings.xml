@@ -11,4 +11,6 @@
     <string name="mic_textbtn3" >Français</string>
 
     <string name="mic_textbtn4" >Chinois</string>
+
+    <string name="mic_textt">A l\'écoute...</string>
 </resources>
