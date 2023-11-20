@@ -5,9 +5,9 @@
 
     <string name="mic_textbtn1">English</string>
 
-    <string name="mic_textbtn2">Arabic</string>
+    <string name="mic_textbtn2">عربي</string>
 
-    <string name="mic_textbtn3">French</string>
+    <string name="mic_textbtn3">Français</string>
 
-    <string name="mic_textbtn4" >Chinese</string>
+    <string name="mic_textbtn4" >中国人</string>
 </resources>

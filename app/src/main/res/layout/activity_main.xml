@@ -4,113 +4,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_centerHorizontal="false"
-    tools:context=".MainActivity">
+    android:layout_centerHorizontal="true"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:layout_centerInParent="true">
 
 
-    <LinearLayout
-        android:id="@+id/lang_english"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
+    <Button
+        android:id="@+id/lang_englishbtn"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="false"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="160dp"
+        android:layout_alignParentEnd="false"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="217dp"
+        android:layout_marginTop="313dp"
+        android:layout_marginEnd="150dp"
         android:background="@drawable/button"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:textAlignment="gravity"
-        android:visibility="visible">
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:src="@drawable/button"
+        android:text="@string/mic_textbtn1"
+        android:textColor="@color/dark_green"
+        android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/lang_englishbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="20dp"
-            android:text="@string/mic_textbtn1"
-            android:textColor="@color/white" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lang_Arabic"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="158dp"
+    <Button
+        android:id="@+id/lang_Arabicbtn"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lang_englishbtn"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_marginStart="217dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="150dp"
         android:background="@drawable/button"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:text="@string/mic_textbtn2"
+        android:textColor="@color/dark_green"
+        android:textSize="20sp" />
 
-
-        <Button
-            android:id="@+id/lang_Arabicbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="250dp"
-            android:gravity="center_horizontal|top"
-            android:maxLines="2"
-            android:paddingBottom="20dp"
-            android:text="@string/mic_textbtn2" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/lang_French"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="158dp"
+    <Button
+        android:id="@+id/lang_Frenchbtn"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lang_Arabicbtn"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="217dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="150dp"
         android:background="@drawable/button"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:text="@string/mic_textbtn3"
+        android:textColor="@color/dark_green"
+        android:textSize="20sp" />
 
 
-        <Button
-            android:id="@+id/lang_Frenchbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="false"
-            android:layout_marginTop="300dp"
-            android:layout_gravity="center_horizontal"
-            android:maxLines="2"
-            android:paddingBottom="20dp"
-            android:text="@string/mic_textbtn3" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lang_chinese"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="450dp"
+    <Button
+        android:id="@+id/lang_chinesebtn"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lang_Frenchbtn"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_marginStart="217dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="150dp"
+        android:layout_centerInParent="true"
         android:background="@drawable/button"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-
-        <Button
-            android:id="@+id/lang_chinesebtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center_horizontal|top"
-            android:maxLines="2"
-            android:paddingBottom="20dp"
-            android:text="@string/mic_textbtn4" />
-
-    </LinearLayout>
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:text="@string/mic_textbtn4"
+        android:textColor="@color/dark_green"
+        android:textSize="20sp" />
 
 
 </RelativeLayout>
