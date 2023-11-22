@@ -12,5 +12,10 @@
 
     <string name="mic_textbtn4" >Chinois</string>
 
-    <string name="mic_textt">A l\'écoute...</string>
+    <string name="mic_textt">A l\'écoute…</string>
+
+    <string name="text">Appuyez pour parler </string>
+
+    <string name="ans_textt">Je parle……</string>
+
 </resources>

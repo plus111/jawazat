@@ -9,7 +9,13 @@
 
     <string name="mic_textbtn3">Français</string>
 
-    <string name="mic_textbtn4" >中国人</string>
+    <string name="mic_textbtn4">中国人</string>
 
-    <string name="mic_textt">Listening...</string>
+    <string name="mic_textt">Im Listening…</string>
+
+    <string name="ans_textt">Im Speaking…</string>
+
+    <string name="text">Press to Talk</string>
+
+
 </resources>

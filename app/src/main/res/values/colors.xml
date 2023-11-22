@@ -14,6 +14,9 @@
 
     <color name="white">#FFFFFFFF</color>
 
-    <color name="dark_green">#002800 </color>
+    <color name="dark_green">#165939 </color>
+
+    <color name="light_darkgreen">#1F754C </color>
+
 
 </resources>

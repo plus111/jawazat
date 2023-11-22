@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Push_TalkActivity"
+    android:layout_centerInParent="true"
+    android:background="@color/dark_green">
+
+
+    <RelativeLayout
+        android:id="@+id/mic"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/mic_button"
+        android:src="@color/light_darkgreen"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/mic_btn"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="51dp"
+            android:layout_marginTop="51dp"
+            android:src="@drawable/microphone" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/back_btn"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="282dp"
+        android:background="@drawable/back_btn" />
+
+    <TextView
+        android:id="@+id/press_text"
+        android:layout_width="392dp"
+        android:layout_height="49dp"
+        android:layout_below="@+id/mic"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="322dp"
+        android:gravity="center_horizontal|center"
+        android:text="@string/text"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:visibility="visible"/>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="165dp"
+        android:layout_height="185dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="23dp"
+        android:src="@drawable/jawazat_white_logo" />
+
+
+    <ImageView
+        android:id="@+id/headphone"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="455dp"
+        android:layout_marginTop="282dp"
+        android:src="@drawable/headphones"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/speak"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="455dp"
+        android:layout_marginTop="282dp"
+        android:src="@drawable/volume"
+        android:visibility="gone"/>
+
+
+    <TextView
+        android:id="@+id/listen_textt"
+        android:layout_width="392dp"
+        android:layout_height="49dp"
+        android:layout_below="@+id/headphone"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="322dp"
+        android:gravity="center_horizontal|center"
+        android:text="@string/mic_textt"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/speak_textt"
+        android:layout_width="392dp"
+        android:layout_height="49dp"
+        android:layout_below="@+id/headphone"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="322dp"
+        android:gravity="center_horizontal|center"
+        android:text="@string/ans_textt"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:visibility="gone"/>
+
+
+    <TextView
+        android:id="@+id/tv_speech_to_text"
+        android:layout_width="320dp"
+        android:layout_height="230dp"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="-21dp"
+        android:layout_marginTop="453dp"
+        android:layout_marginEnd="-242dp"
+        android:background="@drawable/text_rectangle"
+        android:padding="10dp"
+        android:textSize="30sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/text_res"
+        android:layout_width="320dp"
+        android:layout_height="230dp"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="-21dp"
+        android:layout_marginTop="453dp"
+        android:layout_marginEnd="-242dp"
+        android:background="@drawable/text_rectangle"
+        android:padding="10dp"
+        android:textSize="30sp"
+        android:visibility="gone"/>
+
+</RelativeLayout>

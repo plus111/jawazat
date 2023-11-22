@@ -16,8 +16,10 @@ import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,31 +34,46 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Objects;
 
-public class Listen extends AppCompatActivity {
+public class Push_TalkActivity extends AppCompatActivity {
 
     private ImageView iv_mic;
-    private EditText tv_Speech_to_text;
+    private TextView tv_Speech_to_text;
     private TextView answerText;
+    private TextView listen_textt;
+    private TextView speak_textt;
     private SpeechRecognizer speechRecognizer;
+    private Button back_btn;
+    private RelativeLayout mic;
+    private ImageView headphone;
+    private ImageView speak;
+    private TextView press_text;
+
     private static final int REQUEST_CODE_SPEECH_INPUT = 1;
     LanguageManager lang = new LanguageManager(this);
     String selectedLanguage;
-//    = Objects.requireNonNull(getIntent().getExtras()).getString("langg");
+
 
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listen);
+        setContentView(R.layout.push_talk);
 
-        iv_mic = findViewById(R.id.iv_mic);
+        iv_mic = findViewById(R.id.mic_btn);
+        press_text = findViewById(R.id.press_text);
         tv_Speech_to_text = findViewById(R.id.tv_speech_to_text);
-        answerText = findViewById(R.id.answer);
+        answerText = findViewById(R.id.text_res);
+        back_btn = findViewById(R.id.back_btn);
+        mic = findViewById(R.id.mic);
+        headphone = findViewById(R.id.headphone);
+        speak = findViewById(R.id.speak);
+        listen_textt = findViewById(R.id.listen_textt);
+        speak_textt = findViewById(R.id.speak_textt);
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+
 
 
         if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
@@ -73,62 +90,78 @@ public class Listen extends AppCompatActivity {
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, selectedLanguage);
         Log.d("speechRecognizerIntent", "speechRecognizerIntent: " + speechRecognizerIntent);
 
-        //calling the function
-//        answerQues();
 
-
-
-
-        speechRecognizer.setRecognitionListener(new RecognitionListener() {
+        mic.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onReadyForSpeech(Bundle bundle) {
-            }
+            public void onClick(View v) {
+                mic.setVisibility(View.INVISIBLE);
+                press_text.setVisibility(View.INVISIBLE);
+                headphone.setVisibility(View.VISIBLE);
+                listen_textt.setVisibility(View.VISIBLE);
+                tv_Speech_to_text.setVisibility(View.VISIBLE);
+                speechRecognizer.setRecognitionListener(new RecognitionListener() {
+                    @Override
+                    public void onReadyForSpeech(Bundle bundle) {
+                    }
 
-            @Override
-            public void onBeginningOfSpeech() {
-                tv_Speech_to_text.setText("");
-                tv_Speech_to_text.setHint(getString(R.string.mic_textt));
+                    @Override
+                    public void onBeginningOfSpeech() {
+                        tv_Speech_to_text.setText("");
+                        tv_Speech_to_text.setHint(getString(R.string.mic_textt));
 
+                    }
 
+                    @Override
+                    public void onRmsChanged(float v) {
+                    }
 
-            }
+                    @Override
+                    public void onBufferReceived(byte[] bytes) {
+                    }
 
-            @Override
-            public void onRmsChanged(float v) {
-            }
+                    @Override
+                    public void onEndOfSpeech() {
+                    }
 
-            @Override
-            public void onBufferReceived(byte[] bytes) {
-            }
+                    @Override
+                    public void onError(int i) {
+                    }
 
-            @Override
-            public void onEndOfSpeech() {
-            }
+                    @Override
+                    public void onResults(Bundle bundle) {
+                        iv_mic.setImageResource(R.drawable.mic_button);
+                        ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                        tv_Speech_to_text.setText(data.get(0));
 
-            @Override
-            public void onError(int i) {
-            }
+                        //calling the functions
+                        sendingAns(String.valueOf(data.get(0)), selectedLanguage);
+                    }
 
-            @Override
-            public void onResults(Bundle bundle) {
-                iv_mic.setImageResource(R.drawable.mic);
-                ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                tv_Speech_to_text.setText(data.get(0));
+                    @Override
+                    public void onPartialResults(Bundle bundle) {
 
-                //calling the functions
-                sendingAns(String.valueOf(data.get(0)), selectedLanguage);
-            }
+                    }
 
-            @Override
-            public void onPartialResults(Bundle bundle) {
+                    @Override
+                    public void onEvent(int i, Bundle bundle) {
 
-            }
-
-            @Override
-            public void onEvent(int i, Bundle bundle) {
-
+                    }
+                });
             }
         });
+
+        sendingAns(String.valueOf(tv_Speech_to_text),selectedLanguage);
+
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Push_TalkActivity.this,MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
 
         iv_mic.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
@@ -139,7 +172,7 @@ public class Listen extends AppCompatActivity {
 
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
-                    iv_mic.setImageResource(R.drawable.mic);
+                    iv_mic.setImageResource(R.drawable.mic_button);
                     speechRecognizer.startListening(speechRecognizerIntent);
                 }
                 return false;
@@ -167,9 +200,11 @@ public class Listen extends AppCompatActivity {
 
     }
 
+
     public void sendingAns(String tv_Speech_to_text,String selectedLanguage){
+
         String url = "http://192.168.100.67:5000/sentence";
-        RequestQueue queue = Volley.newRequestQueue(Listen.this);
+        RequestQueue queue = Volley.newRequestQueue(Push_TalkActivity.this);
 
         StringRequest request = new StringRequest(
                 Request.Method.POST,
@@ -177,13 +212,13 @@ public class Listen extends AppCompatActivity {
                 new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.i("TAG", "onResponse: ");
-
                         try {
 
-//                            String Ans = response.("responsee", "");
+                            speak.setVisibility(View.VISIBLE);
+                            speak_textt.setVisibility(View.VISIBLE);
+                            answerText.setVisibility(View.VISIBLE);
                             answerText.setText(response);
-                            Log.d("SuccessResponse2", "onResponse: ");
+                            Log.d("SuccessResponse", "onResponse: ");
 
                         } catch (Exception e) {
                             Log.e("Error", "onErrorResponse: ", e);

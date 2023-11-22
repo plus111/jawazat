@@ -2,36 +2,14 @@ package com.qss.testtwospeech;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.TargetApi;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -43,12 +21,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,9 +28,6 @@ public class MainActivity extends AppCompatActivity {
     Button Arabicbtn;
     Button Frenchbtn;
     Button Chinesebtn;
-    private SpeechRecognizer speechRecognizer;
-
-    private static final String SELECTED_LANGUAGE = "Locale.Helper.Selected.Language";
     final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
     @Override
@@ -84,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
                 // Move to another page using Intent
-                Intent intent = new Intent(MainActivity.this, Listen.class);
+                Intent intent = new Intent(MainActivity.this, Push_TalkActivity.class);
                 intent.putExtra("langg","en-US");
                 startActivity(intent);
 
@@ -139,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
                 // Move to another page using Intent
-                Intent intent = new Intent(MainActivity.this, Listen.class);
+                Intent intent = new Intent(MainActivity.this, Push_TalkActivity.class);
                 intent.putExtra("langg","ar-SA");
                 startActivity(intent);
                 StringRequest request = new StringRequest(
@@ -194,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
             RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
             // Move to another page using Intent
-            Intent intent = new Intent(MainActivity.this, Listen.class);
+            Intent intent = new Intent(MainActivity.this, Push_TalkActivity.class);
             intent.putExtra("langg","fr-FR");
             startActivity(intent);
 
@@ -250,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
             RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
             // Move to another page using Intent
-            Intent intent = new Intent(MainActivity.this, Listen.class);
+            Intent intent = new Intent(MainActivity.this, Push_TalkActivity.class);
             intent.putExtra("langg","zh-tw");
             startActivity(intent);
 

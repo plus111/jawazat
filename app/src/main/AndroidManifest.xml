@@ -16,7 +16,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Listen"
+            android:name=".Listen_SpeakActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Push_TalkActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

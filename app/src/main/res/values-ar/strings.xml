@@ -12,5 +12,11 @@
 
     <string name="mic_textbtn4" >الصينية </string>
 
-    <string name="mic_textt">جاري الاستماع...</string>
+    <string name="mic_textt">جاري الاستماع…</string>
+
+    <string name="text">اضغط للتحدث</string>
+
+    <string name="ans_textt">انا اتحدث…</string>
+
+
 </resources>
