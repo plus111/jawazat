@@ -52,7 +52,8 @@
         android:text="@string/text"
         android:textColor="@color/white"
         android:textSize="25sp"
-        android:visibility="visible"/>
+        android:visibility="visible"
+        android:layout_centerInParent="true"/>
 
     <ImageView
         android:id="@+id/logo"
@@ -73,7 +74,8 @@
         android:layout_marginStart="455dp"
         android:layout_marginTop="282dp"
         android:src="@drawable/headphones"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
 
     <ImageView
         android:id="@+id/speak"
@@ -84,7 +86,9 @@
         android:layout_marginStart="455dp"
         android:layout_marginTop="282dp"
         android:src="@drawable/volume"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        />
 
 
     <TextView
@@ -99,7 +103,8 @@
         android:text="@string/mic_textt"
         android:textColor="@color/white"
         android:textSize="25sp"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
 
     <TextView
         android:id="@+id/speak_textt"
@@ -113,7 +118,8 @@
         android:text="@string/ans_textt"
         android:textColor="@color/white"
         android:textSize="25sp"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
 
 
     <TextView
@@ -129,7 +135,8 @@
         android:background="@drawable/text_rectangle"
         android:padding="10dp"
         android:textSize="30sp"
-        android:visibility="gone" />
+        android:visibility="gone"
+        />
 
     <TextView
         android:id="@+id/text_res"
