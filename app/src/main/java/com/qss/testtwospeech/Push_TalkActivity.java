@@ -94,6 +94,8 @@ public class Push_TalkActivity extends AppCompatActivity {
         mic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                lang.updateResource("en");
+//                recreate();
                 mic.setVisibility(View.INVISIBLE);
                 press_text.setVisibility(View.INVISIBLE);
                 headphone.setVisibility(View.VISIBLE);
@@ -106,8 +108,6 @@ public class Push_TalkActivity extends AppCompatActivity {
 
                     @Override
                     public void onBeginningOfSpeech() {
-                        tv_Speech_to_text.setText("");
-                        tv_Speech_to_text.setHint(getString(R.string.mic_textt));
 
                     }
 
@@ -150,7 +150,7 @@ public class Push_TalkActivity extends AppCompatActivity {
             }
         });
 
-        sendingAns(String.valueOf(tv_Speech_to_text),selectedLanguage);
+//        sendingAns(String.valueOf(tv_Speech_to_text),selectedLanguage);
 
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,12 +213,15 @@ public class Push_TalkActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            headphone.setVisibility(View.INVISIBLE);
+                            listen_textt.setVisibility(View.INVISIBLE);
 
                             speak.setVisibility(View.VISIBLE);
                             speak_textt.setVisibility(View.VISIBLE);
                             answerText.setVisibility(View.VISIBLE);
                             answerText.setText(response);
                             Log.d("SuccessResponse", "onResponse: ");
+
 
                         } catch (Exception e) {
                             Log.e("Error", "onErrorResponse: ", e);
@@ -257,6 +260,4 @@ public class Push_TalkActivity extends AppCompatActivity {
         queue.add(request);
 
     }
-
-
 }
