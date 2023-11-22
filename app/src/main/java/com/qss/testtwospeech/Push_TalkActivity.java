@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
@@ -221,6 +222,16 @@ public class Push_TalkActivity extends AppCompatActivity {
                             answerText.setVisibility(View.VISIBLE);
                             answerText.setText(response);
                             Log.d("SuccessResponse", "onResponse: ");
+                            // Delayed visibility change after 3 seconds
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Set visibility back to invisible after 3 seconds
+                                    mic.setVisibility(View.VISIBLE);
+                                    press_text.setVisibility(View.INVISIBLE);
+
+                                }
+                            }, 10000); //  10 seconds
 
 
                         } catch (Exception e) {
