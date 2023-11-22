@@ -18,7 +18,8 @@
         android:layout_marginStart="383dp"
         android:layout_marginTop="38dp"
         android:layout_marginEnd="187dp"
-        android:src="@drawable/jawazat_logo" />
+        android:src="@drawable/jawazat_logo"
+        android:layout_centerInParent="true"/>
 
     <Button
         android:id="@+id/lang_englishbtn"
