@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Push_TalkActivity"
     android:layout_centerInParent="true"
-    android:background="@color/dark_green">
+    android:background="@drawable/screen">
 
 
     <RelativeLayout
@@ -53,7 +53,7 @@
         android:layout_marginEnd="168dp"
         android:gravity="center_horizontal|center"
         android:text="@string/text"
-        android:textColor="@color/white"
+        android:textColor="@color/dark_green"
         android:textSize="25sp"
         android:visibility="visible" />
 
@@ -64,7 +64,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="23dp"
-        android:src="@drawable/jawazat_white_logo" />
+        android:src="@drawable/jawazat_logo" />
 
 
     <ImageView
