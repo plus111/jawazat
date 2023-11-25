@@ -204,7 +204,7 @@ public class Push_TalkActivity extends AppCompatActivity {
 
     public void sendingAns(String tv_Speech_to_text,String selectedLanguage){
 
-        String url = "http://192.168.100.67:5000/sentence";
+        String url = "http://conversation.qltyss.com/sentence";
         RequestQueue queue = Volley.newRequestQueue(Push_TalkActivity.this);
 
         StringRequest request = new StringRequest(
