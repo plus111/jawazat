@@ -24,6 +24,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -151,7 +152,6 @@ public class Push_TalkActivity extends AppCompatActivity {
             }
         });
 
-//        sendingAns(String.valueOf(tv_Speech_to_text),selectedLanguage);
 
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -247,27 +247,31 @@ public class Push_TalkActivity extends AppCompatActivity {
                         Log.e("Error", "onErrorResponse: ", error);
                     }
                 }) {
-            @Override
-            public String getBodyContentType() {
-                Log.d("TAG", "getBodyContentType: ");
-                return "application/json";
-            }
+                    @Override
+                    public String getBodyContentType() {
+                        Log.d("TAG", "getBodyContentType: ");
+                        return "application/json";
+                    }
 
-            @Override
-            public byte[] getBody() {
-                JSONObject jsonBody = new JSONObject();
-                try {
-                    jsonBody.put("lang", selectedLanguage);
-                    Log.d("chosenlang", "getBody: ");
-                    jsonBody.put("sentence", "" + tv_Speech_to_text);
-                    Log.d("sentsentence", "sentence: ");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                return jsonBody.toString().getBytes();
-            }
-        };
-
+                    @Override
+                    public byte[] getBody() {
+                        JSONObject jsonBody = new JSONObject();
+                        try {
+                            jsonBody.put("lang", selectedLanguage);
+                            Log.d("chosenlang", "getBody: ");
+                            jsonBody.put("sentence", "" + tv_Speech_to_text);
+                            Log.d("sentsentence", "sentence: ");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        return jsonBody.toString().getBytes();
+                    }
+                };
+            // Set the retry policy
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                    0,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(request);
 
     }
