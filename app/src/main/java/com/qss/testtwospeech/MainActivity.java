@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 // url to post our data
-                String url = "http://192.168.100.67:5000/sentence";
+                String url = "http://conversation.qltyss.com/sentence";
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
                 // Move to another page using Intent
