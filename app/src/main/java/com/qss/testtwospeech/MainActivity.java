@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     Button Arabicbtn;
     Button Frenchbtn;
     Button Chinesebtn;
-    final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

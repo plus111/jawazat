@@ -8,17 +8,18 @@
     android:orientation="vertical"
     tools:context=".MainActivity"
     android:layout_centerInParent="true"
-    android:background="@drawable/screen">
+    android:background="@drawable/bacgrond_jwazat">
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
-        android:layout_marginStart="382dp"
-        android:layout_marginTop="47dp"
+        android:layout_marginStart="380dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="187dp"
         android:src="@drawable/jawazat_logo" />
 
@@ -31,7 +32,7 @@
         android:layout_alignParentEnd="false"
         android:layout_centerInParent="true"
         android:layout_marginStart="217dp"
-        android:layout_marginTop="313dp"
+        android:layout_marginTop="311dp"
         android:layout_marginEnd="150dp"
         android:background="@drawable/button"
         android:paddingStart="25dp"
@@ -57,7 +58,7 @@
         android:paddingEnd="25dp"
         android:text="@string/mic_textbtn2"
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/lang_Frenchbtn"
