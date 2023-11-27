@@ -147,14 +147,15 @@ public class Push_TalkActivity extends AppCompatActivity {
                     public void onError(int errorCode) {
                         if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
                             // Reactivate the microphone button or enable any necessary UI elements
-                            mic.setVisibility(View.VISIBLE);
-                            press_text.setVisibility(View.VISIBLE);
-                            headphone.setVisibility(View.INVISIBLE);
-                            listen_textt.setVisibility(View.INVISIBLE);
-                            tv_Speech_to_text.setVisibility(View.INVISIBLE);
+                            mic.setVisibility(View.INVISIBLE);
+                            press_text.setVisibility(View.INVISIBLE);
+                            err_speech.setVisibility(View.VISIBLE);
 
                         }else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
-
+                            // Reactivate the microphone button or enable any necessary UI elements
+                            mic.setVisibility(View.INVISIBLE);
+                            press_text.setVisibility(View.INVISIBLE);
+                            network_err.setVisibility(View.VISIBLE);
                         }
                     }
 
