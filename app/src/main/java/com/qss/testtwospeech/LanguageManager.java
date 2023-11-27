@@ -25,5 +25,6 @@ public class LanguageManager {
         Configuration config = res.getConfiguration();
         config.locale = locale;
         res.updateConfiguration(config,res.getDisplayMetrics());
+
     }
 }

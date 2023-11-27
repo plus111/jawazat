@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Push_TalkActivity"
     android:layout_centerInParent="true"
-    android:background="@drawable/bacgrond_jwazat">
+    android:background="@drawable/background_jwazat">
 
 
     <RelativeLayout
@@ -30,14 +30,15 @@
 
     </RelativeLayout>
 
+
     <Button
         android:id="@+id/back_btn"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="152dp"
-        android:layout_marginTop="282dp"
+        android:layout_marginStart="103dp"
+        android:layout_marginTop="116dp"
         android:background="@drawable/back_btn" />
 
     <TextView
@@ -49,7 +50,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerInParent="true"
         android:layout_marginStart="171dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="168dp"
         android:gravity="center_horizontal|center"
         android:text="@string/text"
@@ -57,15 +58,16 @@
         android:textSize="25sp"
         android:visibility="visible" />
 
-
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentLeft="true"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="900dp"
-        android:layout_marginTop="41dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
         android:src="@drawable/jawazat_logo" />
 
     <ImageView
@@ -76,7 +78,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="455dp"
         android:layout_marginTop="282dp"
-        android:src="@drawable/headphones"
+        android:src="@drawable/greenheadphones"
         android:visibility="gone"
         android:layout_centerInParent="true"/>
 
@@ -90,8 +92,21 @@
         android:layout_marginTop="282dp"
         android:src="@drawable/volume"
         android:visibility="gone"
+        android:layout_centerInParent="true" />
+
+    <ImageView
+        android:id="@+id/load"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
+        android:layout_marginStart="450dp"
+        android:layout_marginTop="295dp"
+        android:src="@drawable/loading"
+        android:visibility="gone"
         />
+
 
 
     <TextView
@@ -104,7 +119,7 @@
         android:layout_marginEnd="322dp"
         android:gravity="center_horizontal|center"
         android:text="@string/mic_textt"
-        android:textColor="@color/white"
+        android:textColor="@color/dark_green"
         android:textSize="25sp"
         android:visibility="gone"
         android:layout_centerInParent="true"/>
@@ -119,7 +134,7 @@
         android:layout_marginEnd="322dp"
         android:gravity="center_horizontal|center"
         android:text="@string/ans_textt"
-        android:textColor="@color/white"
+        android:textColor="@color/dark_green"
         android:textSize="25sp"
         android:visibility="gone"
         android:layout_centerInParent="true"/>
@@ -138,8 +153,7 @@
         android:background="@drawable/text_rectangle"
         android:padding="10dp"
         android:textSize="30sp"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/text_res"
@@ -149,11 +163,106 @@
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:layout_marginStart="-21dp"
-        android:layout_marginTop="453dp"
+        android:layout_marginTop="431dp"
         android:layout_marginEnd="-242dp"
         android:background="@drawable/text_rectangle"
         android:padding="10dp"
         android:textSize="30sp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
+
+
+    <LinearLayout
+        android:id="@+id/err_speech"
+        android:layout_width="wrap_content"
+        android:layout_height="563dp"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+
+        <ImageView
+            android:id="@+id/error"
+            android:layout_width="98dp"
+            android:layout_height="188dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/redheadphones" />
+
+        <TextView
+            android:id="@+id/error_textt"
+            android:layout_width="334dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/error_text"
+            android:textColor="@color/red"
+            android:textSize="25sp" />
+
+        <LinearLayout
+            android:id="@+id/mic1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/mic_button"
+            android:orientation="vertical"
+            android:src="@color/light_darkgreen">
+
+            <ImageView
+                android:id="@+id/mic_btn1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/microphone" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/network_err"
+        android:layout_width="wrap_content"
+        android:layout_height="563dp"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+
+        <ImageView
+            android:id="@+id/error1"
+            android:layout_width="98dp"
+            android:layout_height="188dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/redheadphones" />
+
+        <TextView
+            android:id="@+id/error_textt1"
+            android:layout_width="334dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/network_text"
+            android:textColor="@color/red"
+            android:textSize="25sp" />
+
+        <LinearLayout
+            android:id="@+id/mic2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/mic_button"
+            android:orientation="vertical"
+            android:src="@color/light_darkgreen">
+
+            <ImageView
+                android:id="@+id/mic_btn2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/microphone" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

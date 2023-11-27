@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">texttospeech</string>
 
     <string name="mic_text" >اضغط على الميكروفون وتحدث</string>
 
-    <string name="mic_textbtn1" >الإنجليزية</string>
+    <string name="mic_textt" >جاري الاستماع…</string>
 
-    <string name="mic_textbtn2" >العربية</string>
+    <string name="text" >اضغط للتحدث</string>
 
-    <string name="mic_textbtn3" >الفرنسية</string>
+    <string name="ans_textt" >انا اتحدث…</string>
 
-    <string name="mic_textbtn4" >الصينية </string>
+    <string name="error_text">لم أفهم ذلك هل يمكنك التكرار؟</string>
 
-    <string name="mic_textt">جاري الاستماع…</string>
-
-    <string name="text">اضغط للتحدث</string>
-
-    <string name="ans_textt">انا اتحدث…</string>
+    <string name="network_text">الخدمة غير متاحة 404</string>
 
 
 </resources>

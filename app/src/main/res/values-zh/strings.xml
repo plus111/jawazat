@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">texttospeech</string>
 
     <string name="mic_text" > 点击麦克风并说话 </string>
 
-    <string name="mic_textbtn1" >英语</string>
+    <string name="mic_textt" >听…</string>
 
-    <string name="mic_textbtn2" >阿拉伯</string>
+    <string name="text" >按通话</string>
 
-    <string name="mic_textbtn3" >法语</string>
+    <string name="ans_textt" >我正在说话……</string>
 
-    <string name="mic_textbtn4" >中国人</string>
+    <string name="error_text">我没听懂，你能再说一遍吗？</string>
 
-    <string name="mic_textt">听...</string>
-
-    <string name="text">按通话</string>
-
-    <string name="ans_textt">我正在说话……</string>
+    <string name="network_text">服务不可用 404</string>
 
 </resources>

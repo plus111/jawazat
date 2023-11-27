@@ -1,21 +1,27 @@
 <resources>
+
+
     <string name="app_name">texttospeech</string>
 
     <string name="mic_text">tap mic and speak</string>
 
-    <string name="mic_textbtn1">English</string>
+    <string name="mic_textbtn1" translatable="false">English</string>
 
-    <string name="mic_textbtn2">عربي</string>
+    <string name="mic_textbtn2" translatable="false">العربية</string>
 
-    <string name="mic_textbtn3">Français</string>
+    <string name="mic_textbtn3" translatable="false">Français</string>
 
-    <string name="mic_textbtn4">中国人</string>
+    <string name="mic_textbtn4" translatable="false">中国人</string>
 
     <string name="mic_textt">Im Listening…</string>
 
     <string name="ans_textt">Im Speaking…</string>
 
     <string name="text">Press to Talk</string>
+
+    <string name="error_text">I didn’t Get That\n Can you repeat?</string>
+
+    <string name="network_text">Service Unavailable 404</string>
 
 
 </resources>

@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">texttospeech</string>
 
     <string name="mic_text" >appuyez sur le micro et parlez</string>
 
-    <string name="mic_textbtn1" >Anglais</string>
+    <string name="mic_textt" >A l\'écoute…</string>
 
-    <string name="mic_textbtn2" >Arabe</string>
+    <string name="text" >Appuyez pour parler </string>
 
-    <string name="mic_textbtn3" >Français</string>
+    <string name="ans_textt" >Je parle……</string>
 
-    <string name="mic_textbtn4" >Chinois</string>
+    <string name="error_text">Je n\'ai pas compris. Pouvez-vous répéter?</string>
 
-    <string name="mic_textt">A l\'écoute…</string>
-
-    <string name="text">Appuyez pour parler </string>
-
-    <string name="ans_textt">Je parle……</string>
+    <string name="network_text">Service indisponible 404</string>
 
 </resources>

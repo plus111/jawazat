@@ -43,9 +43,6 @@ public class MainActivity extends AppCompatActivity {
         Englishbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                lang.updateResource("en");
-//                recreate();
-
 
                 // url to post our data
                 String url = "http://conversation.qltyss.com/sentence";
@@ -54,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 // Move to another page using Intent
                 Intent intent = new Intent(MainActivity.this, Push_TalkActivity.class);
                 intent.putExtra("langg","en-US");
+                intent.putExtra("textlang","en");
                 startActivity(intent);
 
                 StringRequest request = new StringRequest(
@@ -109,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 // Move to another page using Intent
                 Intent intent = new Intent(MainActivity.this, Push_TalkActivity.class);
                 intent.putExtra("langg","ar-SA");
+                intent.putExtra("textlang","ar");
                 startActivity(intent);
                 StringRequest request = new StringRequest(
                         Request.Method.POST,
@@ -153,8 +152,7 @@ public class MainActivity extends AppCompatActivity {
         Frenchbtn.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-//            lang.updateResource("fr");
-//            recreate();
+
 
 
             // url to post our data
@@ -164,6 +162,8 @@ public class MainActivity extends AppCompatActivity {
             // Move to another page using Intent
             Intent intent = new Intent(MainActivity.this, Push_TalkActivity.class);
             intent.putExtra("langg","fr-FR");
+            intent.putExtra("textlang","fr");
+
             startActivity(intent);
 
             StringRequest request = new StringRequest(
@@ -210,8 +210,7 @@ public class MainActivity extends AppCompatActivity {
         Chinesebtn.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-//            lang.updateResource("zh");
-//            recreate();
+
 
             // url to post our data
             String url = "http://conversation.qltyss.com/sentence";
@@ -220,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
             // Move to another page using Intent
             Intent intent = new Intent(MainActivity.this, Push_TalkActivity.class);
             intent.putExtra("langg","zh-tw");
+            intent.putExtra("textlang","zh");
             startActivity(intent);
 
             StringRequest request = new StringRequest(

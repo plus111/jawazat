@@ -18,5 +18,7 @@
 
     <color name="light_darkgreen">#1F754C </color>
 
+    <color name="red"> #C12828</color>
+
 
 </resources>
