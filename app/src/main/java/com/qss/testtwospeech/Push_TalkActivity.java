@@ -363,6 +363,9 @@ public class Push_TalkActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    mic.setVisibility(View.VISIBLE);
+                    listen_lin.setVisibility(View.INVISIBLE);
+                    speak_lin.setVisibility(View.INVISIBLE);
                     mic.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -429,12 +432,15 @@ public class Push_TalkActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    mic.setVisibility(View.VISIBLE);
+                    listen_lin.setVisibility(View.INVISIBLE);
+                    speak_lin.setVisibility(View.INVISIBLE);
                     mic.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            mic.setVisibility(View.VISIBLE);
+                            mic.setVisibility(View.INVISIBLE);
                             press_text.setVisibility(View.INVISIBLE);
-                            listen_lin.setVisibility(View.INVISIBLE);
+                            listen_lin.setVisibility(View.VISIBLE);
 
                             speechRecognizer.setRecognitionListener(new RecognitionListener() {
                                 @Override
@@ -493,8 +499,12 @@ public class Push_TalkActivity extends AppCompatActivity {
             }, 10000);
         } else if (textlang.equals("fr")) {
             handler.postDelayed(new Runnable() {
+
                 @Override
                 public void run() {
+                    mic.setVisibility(View.VISIBLE);
+                    listen_lin.setVisibility(View.INVISIBLE);
+                    speak_lin.setVisibility(View.INVISIBLE);
                     mic.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -561,6 +571,9 @@ public class Push_TalkActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    mic.setVisibility(View.VISIBLE);
+                    listen_lin.setVisibility(View.INVISIBLE);
+                    speak_lin.setVisibility(View.INVISIBLE);
                     mic.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
