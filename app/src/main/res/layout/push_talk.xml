@@ -120,7 +120,8 @@
             android:layout_height="230dp"
             android:layout_gravity="center"
             android:background="@drawable/text_rectangle"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 
@@ -159,103 +160,12 @@
             android:layout_height="230dp"
             android:layout_gravity="center"
             android:background="@drawable/text_rectangle"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:textColor="@color/white"/>
 
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/err_speech"
-        android:layout_width="wrap_content"
-        android:layout_height="563dp"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:visibility="gone">
 
-
-        <ImageView
-            android:id="@+id/error"
-            android:layout_width="98dp"
-            android:layout_height="188dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="100dp"
-            android:src="@drawable/redheadphones" />
-
-        <TextView
-            android:id="@+id/error_textt"
-            android:layout_width="334dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/error_text"
-            android:textColor="@color/red"
-            android:textSize="25sp" />
-
-        <LinearLayout
-            android:id="@+id/mic1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/mic_button"
-            android:orientation="vertical"
-            android:src="@color/light_darkgreen">
-
-            <ImageView
-                android:id="@+id/mic_btn1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
-                android:src="@drawable/microphone" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/network_err"
-        android:layout_width="wrap_content"
-        android:layout_height="563dp"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-
-        <ImageView
-            android:id="@+id/error1"
-            android:layout_width="98dp"
-            android:layout_height="188dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="100dp"
-            android:src="@drawable/redheadphones" />
-
-        <TextView
-            android:id="@+id/error_textt1"
-            android:layout_width="334dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/network_text"
-            android:textColor="@color/red"
-            android:textSize="25sp" />
-
-        <LinearLayout
-            android:id="@+id/mic2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/mic_button"
-            android:orientation="vertical"
-            android:src="@color/light_darkgreen">
-
-            <ImageView
-                android:id="@+id/mic_btn2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
-                android:src="@drawable/microphone" />
-        </LinearLayout>
-
-    </LinearLayout>
 
 </RelativeLayout>
