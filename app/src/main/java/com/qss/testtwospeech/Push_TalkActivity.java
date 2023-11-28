@@ -253,14 +253,13 @@ public class Push_TalkActivity extends AppCompatActivity {
                                 public void run() {
                                     // Set visibility back to invisible after 10 seconds
                                     mic.setVisibility(View.VISIBLE);
-                                    iv_mic.setVisibility(View.VISIBLE);
                                     press_text.setVisibility(View.VISIBLE);
                                     speak_lin.setVisibility(View.INVISIBLE);
                                     listen_lin.setVisibility(View.INVISIBLE);
                                     load.setVisibility(View.INVISIBLE);
 
                                 }
-                            }, 10000); //  10 seconds
+                            }, 15000); //  10 seconds
 
 
                         } catch (Exception e) {
@@ -313,38 +312,24 @@ public class Push_TalkActivity extends AppCompatActivity {
                 newLocale = new Locale("en");
                 Log.d("Locale", "Locale: "+ newLocale);
                 Log.d("textlang", "textlang: " + textlang);
-                press_text.setText(getResources().getString(R.string.text));
-                listen_textt.setText(getResources().getString(R.string.mic_textt));
-                speak_textt.setText(getResources().getString(R.string.ans_textt));
-                speak_textt.setText(getResources().getString(R.string.ans_textt));
-                speak_textt.setText(getResources().getString(R.string.ans_textt));
                 break;
 
             case "ar":
                 newLocale = new Locale("ar");
                 Log.d("Locale", "Locale: "+ newLocale);
                 Log.d("textlang", "textlang: " + textlang);
-                press_text.setText(getResources().getString(R.string.text));
-                listen_textt.setText(getResources().getString(R.string.mic_textt));
-                speak_textt.setText(getResources().getString(R.string.ans_textt));
                 break;
 
             case "fr":
                 newLocale = new Locale("fr");
                 Log.d("Locale", "Locale: "+ newLocale);
                 Log.d("textlang", "textlang: " + textlang);
-                press_text.setText(getResources().getString(R.string.text));
-                listen_textt.setText(getResources().getString(R.string.mic_textt));
-                speak_textt.setText(getResources().getString(R.string.ans_textt));
                 break;
 
             case "zh":
                 newLocale = new Locale("zh");
                 Log.d("Locale", "Locale: "+ newLocale);
                 Log.d("textlang", "textlang: " + textlang);
-                press_text.setText(getResources().getString(R.string.text));
-                listen_textt.setText(getResources().getString(R.string.mic_textt));
-                speak_textt.setText(getResources().getString(R.string.ans_textt));
                 break;
 
             default:
@@ -353,7 +338,13 @@ public class Push_TalkActivity extends AppCompatActivity {
         }
         configuration.setLocale(newLocale);
         getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
+        updateLayout();
 
+    }
+    private void updateLayout() {
+        press_text.setText(getResources().getString(R.string.text));
+        listen_textt.setText(getResources().getString(R.string.mic_textt));
+        speak_textt.setText(getResources().getString(R.string.ans_textt));
     }
 
     public void timerbtn(String textlang){
@@ -378,6 +369,8 @@ public class Push_TalkActivity extends AppCompatActivity {
                                 @Override
                                 public void onBeginningOfSpeech() {
                                 }
+
+
 
                                 @Override
                                 public void onRmsChanged(float v) {
@@ -405,6 +398,7 @@ public class Push_TalkActivity extends AppCompatActivity {
                                 @Override
                                 public void onResults(Bundle bundle) {
                                     iv_mic.setImageResource(R.drawable.mic_button);
+
                                     ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
                                     if (data != null && !data.isEmpty()) {
@@ -412,6 +406,7 @@ public class Push_TalkActivity extends AppCompatActivity {
                                         tv_Speech_to_text.setText(data.get(0));
                                         sendingAns(String.valueOf(data.get(0)), selectedLanguage);
                                         load.setVisibility(View.INVISIBLE);
+                                        iv_mic.setVisibility(View.VISIBLE);
 
 
                                     } else {
@@ -466,6 +461,8 @@ public class Push_TalkActivity extends AppCompatActivity {
                                 public void onBeginningOfSpeech() {
                                 }
 
+
+
                                 @Override
                                 public void onRmsChanged(float v) {
                                 }
@@ -476,6 +473,8 @@ public class Push_TalkActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onEndOfSpeech() {
+                                    load.setVisibility(View.VISIBLE);
+                                    listen_lin.setVisibility(View.INVISIBLE);
                                 }
 
                                 @Override
@@ -490,23 +489,26 @@ public class Push_TalkActivity extends AppCompatActivity {
                                 @Override
                                 public void onResults(Bundle bundle) {
                                     iv_mic.setImageResource(R.drawable.mic_button);
+
                                     ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
                                     if (data != null && !data.isEmpty()) {
                                         // Recognized speech is not empty
                                         tv_Speech_to_text.setText(data.get(0));
                                         sendingAns(String.valueOf(data.get(0)), selectedLanguage);
+                                        load.setVisibility(View.INVISIBLE);
+                                        iv_mic.setVisibility(View.VISIBLE);
 
-                                        // Hide the error linear layout
-                                        listen_lin.setVisibility(View.INVISIBLE);
-                                        speak_lin.setVisibility(View.INVISIBLE);
 
                                     } else {
+                                        if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
 
-                                        // Show the error linear layout
-//                                network_err.setVisibility(View.VISIBLE);
-                                        listen_lin.setVisibility(View.INVISIBLE);
-                                        speak_lin.setVisibility(View.INVISIBLE);
+                                        } else {
+                                            // Show speech recognition error layout
+//                                        err_speech.setVisibility(View.VISIBLE);
+
+                                        }
+
                                     }
                                 }
 
@@ -549,6 +551,8 @@ public class Push_TalkActivity extends AppCompatActivity {
                                 public void onBeginningOfSpeech() {
                                 }
 
+
+
                                 @Override
                                 public void onRmsChanged(float v) {
                                 }
@@ -559,6 +563,8 @@ public class Push_TalkActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onEndOfSpeech() {
+                                    load.setVisibility(View.VISIBLE);
+                                    listen_lin.setVisibility(View.INVISIBLE);
                                 }
 
                                 @Override
@@ -573,23 +579,26 @@ public class Push_TalkActivity extends AppCompatActivity {
                                 @Override
                                 public void onResults(Bundle bundle) {
                                     iv_mic.setImageResource(R.drawable.mic_button);
+
                                     ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
                                     if (data != null && !data.isEmpty()) {
                                         // Recognized speech is not empty
                                         tv_Speech_to_text.setText(data.get(0));
                                         sendingAns(String.valueOf(data.get(0)), selectedLanguage);
+                                        load.setVisibility(View.INVISIBLE);
+                                        iv_mic.setVisibility(View.VISIBLE);
 
-                                        // Hide the error linear layout
-                                        listen_lin.setVisibility(View.INVISIBLE);
-                                        speak_lin.setVisibility(View.INVISIBLE);
 
                                     } else {
+                                        if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
 
-                                        // Show the error linear layout
-//                                network_err.setVisibility(View.VISIBLE);
-                                        listen_lin.setVisibility(View.INVISIBLE);
-                                        speak_lin.setVisibility(View.INVISIBLE);
+                                        } else {
+                                            // Show speech recognition error layout
+//                                        err_speech.setVisibility(View.VISIBLE);
+
+                                        }
+
                                     }
                                 }
 
@@ -608,7 +617,7 @@ public class Push_TalkActivity extends AppCompatActivity {
                 }
             }, 11000);
 
-            mic.setEnabled(false);
+            iv_mic.setEnabled(false);
 
         } else if (textlang.equals("zh")) {
             handler.postDelayed(new Runnable() {
@@ -631,6 +640,8 @@ public class Push_TalkActivity extends AppCompatActivity {
                                 public void onBeginningOfSpeech() {
                                 }
 
+
+
                                 @Override
                                 public void onRmsChanged(float v) {
                                 }
@@ -641,6 +652,8 @@ public class Push_TalkActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onEndOfSpeech() {
+                                    load.setVisibility(View.VISIBLE);
+                                    listen_lin.setVisibility(View.INVISIBLE);
                                 }
 
                                 @Override
@@ -655,23 +668,26 @@ public class Push_TalkActivity extends AppCompatActivity {
                                 @Override
                                 public void onResults(Bundle bundle) {
                                     iv_mic.setImageResource(R.drawable.mic_button);
+
                                     ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
                                     if (data != null && !data.isEmpty()) {
                                         // Recognized speech is not empty
                                         tv_Speech_to_text.setText(data.get(0));
                                         sendingAns(String.valueOf(data.get(0)), selectedLanguage);
+                                        load.setVisibility(View.INVISIBLE);
+                                        iv_mic.setVisibility(View.VISIBLE);
 
-                                        // Hide the error linear layout
-                                        listen_lin.setVisibility(View.INVISIBLE);
-                                        speak_lin.setVisibility(View.INVISIBLE);
 
                                     } else {
+                                        if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
 
-                                        // Show the error linear layout
-//                                network_err.setVisibility(View.VISIBLE);
-                                        listen_lin.setVisibility(View.INVISIBLE);
-                                        speak_lin.setVisibility(View.INVISIBLE);
+                                        } else {
+                                            // Show speech recognition error layout
+//                                        err_speech.setVisibility(View.VISIBLE);
+
+                                        }
+
                                     }
                                 }
 
@@ -689,13 +705,15 @@ public class Push_TalkActivity extends AppCompatActivity {
                     });
                 }
             }, 12000);
-            mic.setEnabled(false);
+            iv_mic.setEnabled(false);
         }
     }
 
     private void handleSpeechRecognizerError(int errorCode) {
         if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
             Intent intent = new Intent(Push_TalkActivity.this,Error_Activity.class);
+            startActivity(intent);
+            finish();
 
 //            handler.postDelayed(new Runnable() {
 //                @Override
@@ -769,10 +787,9 @@ public class Push_TalkActivity extends AppCompatActivity {
 //            }, 5000);
 
         } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
-            // Reactivate the microphone button or enable any necessary UI elements
-//            network_err.setVisibility(View.VISIBLE);
-            listen_lin.setVisibility(View.INVISIBLE);
-            speak_lin.setVisibility(View.INVISIBLE);
+            Intent intent = new Intent(Push_TalkActivity.this,Error_Activity.class);
+            startActivity(intent);
+            finish();
 
 //            handler.postDelayed(new Runnable() {
 //                @Override
