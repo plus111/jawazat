@@ -72,16 +72,13 @@
         android:src="@drawable/jawazat_logo" />
 
 
-
     <ImageView
         android:id="@+id/load"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
-        android:layout_marginStart="450dp"
-        android:layout_marginTop="295dp"
+        android:layout_marginTop="300dp"
         android:src="@drawable/loading"
         android:visibility="gone" />
 
