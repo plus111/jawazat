@@ -363,279 +363,307 @@ public class Push_TalkActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    mic.setVisibility(View.VISIBLE);
-                    listen_lin.setVisibility(View.INVISIBLE);
-                    speak_lin.setVisibility(View.INVISIBLE);
-                    mic.setOnClickListener(new View.OnClickListener() {
+                    mic.setEnabled(true);
+
+                }
+            }, 9000);
+            mic.setEnabled(false);
+            press_text.setVisibility(View.VISIBLE);
+            mic.setVisibility(View.VISIBLE);
+            listen_lin.setVisibility(View.INVISIBLE);
+            speak_lin.setVisibility(View.INVISIBLE);
+            mic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    press_text.setVisibility(View.INVISIBLE);
+                    listen_lin.setVisibility(View.VISIBLE);
+
+                    speechRecognizer.setRecognitionListener(new RecognitionListener() {
                         @Override
-                        public void onClick(View v) {
-                            mic.setVisibility(View.INVISIBLE);
-                            press_text.setVisibility(View.INVISIBLE);
-                            listen_lin.setVisibility(View.VISIBLE);
+                        public void onReadyForSpeech(Bundle bundle) {
+                        }
 
-                            speechRecognizer.setRecognitionListener(new RecognitionListener() {
-                                @Override
-                                public void onReadyForSpeech(Bundle bundle) {
-                                }
+                        @Override
+                        public void onBeginningOfSpeech() {
+                        }
 
-                                @Override
-                                public void onBeginningOfSpeech() {
-                                }
+                        @Override
+                        public void onRmsChanged(float v) {
+                        }
 
-                                @Override
-                                public void onRmsChanged(float v) {
-                                }
+                        @Override
+                        public void onBufferReceived(byte[] bytes) {
+                        }
 
-                                @Override
-                                public void onBufferReceived(byte[] bytes) {
-                                }
+                        @Override
+                        public void onEndOfSpeech() {
+                        }
 
-                                @Override
-                                public void onEndOfSpeech() {
-                                }
+                        @Override
+                        public void onError(int errorCode) {
+                            if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
+                                handleSpeechRecognizerError(errorCode);
+                            } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
+                                handleSpeechRecognizerError(errorCode);
+                            }
+                        }
 
-                                @Override
-                                public void onError(int errorCode) {
-                                    if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
-                                        handleSpeechRecognizerError(errorCode);
-                                    } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
-                                        handleSpeechRecognizerError(errorCode);
-                                    }
-                                }
+                        @Override
+                        public void onResults(Bundle bundle) {
+                            iv_mic.setImageResource(R.drawable.mic_button);
+                            ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
-                                @Override
-                                public void onResults(Bundle bundle) {
-                                    iv_mic.setImageResource(R.drawable.mic_button);
-                                    ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                                    tv_Speech_to_text.setText(data.get(0));
+                            if (data != null && !data.isEmpty()) {
+                                // Recognized speech is not empty
+                                tv_Speech_to_text.setText(data.get(0));
+                                sendingAns(String.valueOf(data.get(0)), selectedLanguage);
 
-                                    //calling the functions
-                                    sendingAns(String.valueOf(data.get(0)), selectedLanguage);
+                                // Hide the error linear layout
+                                err_speech.setVisibility(View.INVISIBLE);
+                                listen_lin.setVisibility(View.INVISIBLE);
+                                speak_lin.setVisibility(View.INVISIBLE);
 
-                                }
+                            } else {
 
-                                @Override
-                                public void onPartialResults(Bundle bundle) {
+                                // Show the error linear layout
+                                network_err.setVisibility(View.VISIBLE);
+                                listen_lin.setVisibility(View.INVISIBLE);
+                                speak_lin.setVisibility(View.INVISIBLE);
+                            }
+                        }
 
-                                }
+                        @Override
+                        public void onPartialResults(Bundle bundle) {
 
-                                @Override
-                                public void onEvent(int i, Bundle bundle) {
+                        }
 
-                                }
-                            });
+                        @Override
+                        public void onEvent(int i, Bundle bundle) {
+
                         }
                     });
                 }
-            }, 9000);
+            });
+
         } else if (textlang.equals("ar")) {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    mic.setVisibility(View.VISIBLE);
-                    listen_lin.setVisibility(View.INVISIBLE);
-                    speak_lin.setVisibility(View.INVISIBLE);
-                    mic.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            mic.setVisibility(View.INVISIBLE);
-                            press_text.setVisibility(View.INVISIBLE);
-                            listen_lin.setVisibility(View.VISIBLE);
-
-                            speechRecognizer.setRecognitionListener(new RecognitionListener() {
-                                @Override
-                                public void onReadyForSpeech(Bundle bundle) {
-                                }
-
-                                @Override
-                                public void onBeginningOfSpeech() {
-                                }
-
-                                @Override
-                                public void onRmsChanged(float v) {
-                                }
-
-                                @Override
-                                public void onBufferReceived(byte[] bytes) {
-                                }
-
-                                @Override
-                                public void onEndOfSpeech() {
-                                }
-
-                                @Override
-                                public void onError(int errorCode) {
-                                    if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
-                                        handleSpeechRecognizerError(errorCode);
-                                    } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
-                                        handleSpeechRecognizerError(errorCode);
-                                    }
-                                }
-
-                                @Override
-                                public void onResults(Bundle bundle) {
-                                    iv_mic.setImageResource(R.drawable.mic_button);
-                                    ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                                    tv_Speech_to_text.setText(data.get(0));
-
-                                    //calling the functions
-                                    sendingAns(String.valueOf(data.get(0)), selectedLanguage);
-
-                                }
-
-                                @Override
-                                public void onPartialResults(Bundle bundle) {
-
-                                }
-
-                                @Override
-                                public void onEvent(int i, Bundle bundle) {
-
-                                }
-                            });
-                        }
-                    });
+                    mic.setEnabled(true);
                 }
             }, 10000);
-        } else if (textlang.equals("fr")) {
-            handler.postDelayed(new Runnable() {
 
+            mic.setEnabled(false);
+            press_text.setVisibility(View.VISIBLE);
+            mic.setVisibility(View.VISIBLE);
+            listen_lin.setVisibility(View.INVISIBLE);
+            speak_lin.setVisibility(View.INVISIBLE);
+            mic.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void run() {
-                    mic.setVisibility(View.VISIBLE);
-                    listen_lin.setVisibility(View.INVISIBLE);
-                    speak_lin.setVisibility(View.INVISIBLE);
-                    mic.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    mic.setVisibility(View.INVISIBLE);
+                    press_text.setVisibility(View.INVISIBLE);
+                    listen_lin.setVisibility(View.VISIBLE);
+
+                    speechRecognizer.setRecognitionListener(new RecognitionListener() {
                         @Override
-                        public void onClick(View v) {
-                            mic.setVisibility(View.INVISIBLE);
-                            press_text.setVisibility(View.INVISIBLE);
-                            listen_lin.setVisibility(View.VISIBLE);
+                        public void onReadyForSpeech(Bundle bundle) {
+                        }
 
-                            speechRecognizer.setRecognitionListener(new RecognitionListener() {
-                                @Override
-                                public void onReadyForSpeech(Bundle bundle) {
-                                }
+                        @Override
+                        public void onBeginningOfSpeech() {
+                        }
 
-                                @Override
-                                public void onBeginningOfSpeech() {
-                                }
+                        @Override
+                        public void onRmsChanged(float v) {
+                        }
 
-                                @Override
-                                public void onRmsChanged(float v) {
-                                }
+                        @Override
+                        public void onBufferReceived(byte[] bytes) {
+                        }
 
-                                @Override
-                                public void onBufferReceived(byte[] bytes) {
-                                }
+                        @Override
+                        public void onEndOfSpeech() {
+                        }
 
-                                @Override
-                                public void onEndOfSpeech() {
-                                }
+                        @Override
+                        public void onError(int errorCode) {
+                            if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
+                                handleSpeechRecognizerError(errorCode);
+                            } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
+                                handleSpeechRecognizerError(errorCode);
+                            }
+                        }
 
-                                @Override
-                                public void onError(int errorCode) {
-                                    if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
-                                        handleSpeechRecognizerError(errorCode);
-                                    } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
-                                        handleSpeechRecognizerError(errorCode);
-                                    }
-                                }
+                        @Override
+                        public void onResults(Bundle bundle) {
+                            iv_mic.setImageResource(R.drawable.mic_button);
+                            ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                            tv_Speech_to_text.setText(data.get(0));
 
-                                @Override
-                                public void onResults(Bundle bundle) {
-                                    iv_mic.setImageResource(R.drawable.mic_button);
-                                    ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                                    tv_Speech_to_text.setText(data.get(0));
+                            //calling the functions
+                            sendingAns(String.valueOf(data.get(0)), selectedLanguage);
 
-                                    //calling the functions
-                                    sendingAns(String.valueOf(data.get(0)), selectedLanguage);
+                        }
 
-                                }
+                        @Override
+                        public void onPartialResults(Bundle bundle) {
 
-                                @Override
-                                public void onPartialResults(Bundle bundle) {
+                        }
 
-                                }
+                        @Override
+                        public void onEvent(int i, Bundle bundle) {
 
-                                @Override
-                                public void onEvent(int i, Bundle bundle) {
-
-                                }
-                            });
                         }
                     });
                 }
+            });
+
+        } else if (textlang.equals("fr")) {
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mic.setEnabled(true);
+                }
             }, 11000);
+
+            mic.setEnabled(false);
+            mic.setVisibility(View.VISIBLE);
+            press_text.setVisibility(View.VISIBLE);
+            listen_lin.setVisibility(View.INVISIBLE);
+            speak_lin.setVisibility(View.INVISIBLE);
+            mic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mic.setVisibility(View.INVISIBLE);
+                    press_text.setVisibility(View.INVISIBLE);
+                    listen_lin.setVisibility(View.VISIBLE);
+
+                    speechRecognizer.setRecognitionListener(new RecognitionListener() {
+                        @Override
+                        public void onReadyForSpeech(Bundle bundle) {
+                        }
+
+                        @Override
+                        public void onBeginningOfSpeech() {
+                        }
+
+                        @Override
+                        public void onRmsChanged(float v) {
+                        }
+
+                        @Override
+                        public void onBufferReceived(byte[] bytes) {
+                        }
+
+                        @Override
+                        public void onEndOfSpeech() {
+                        }
+
+                        @Override
+                        public void onError(int errorCode) {
+                            if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
+                                handleSpeechRecognizerError(errorCode);
+                            } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
+                                handleSpeechRecognizerError(errorCode);
+                            }
+                        }
+
+                        @Override
+                        public void onResults(Bundle bundle) {
+                            iv_mic.setImageResource(R.drawable.mic_button);
+                            ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                            tv_Speech_to_text.setText(data.get(0));
+
+                            //calling the functions
+                            sendingAns(String.valueOf(data.get(0)), selectedLanguage);
+
+                        }
+
+                        @Override
+                        public void onPartialResults(Bundle bundle) {
+
+                        }
+
+                        @Override
+                        public void onEvent(int i, Bundle bundle) {
+
+                        }
+                    });
+                }
+            });
+
         } else if (textlang.equals("zh")) {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    mic.setVisibility(View.VISIBLE);
-                    listen_lin.setVisibility(View.INVISIBLE);
-                    speak_lin.setVisibility(View.INVISIBLE);
-                    mic.setOnClickListener(new View.OnClickListener() {
+                    mic.setEnabled(true);
+                }
+            }, 12000);
+            mic.setEnabled(false);
+            mic.setVisibility(View.VISIBLE);
+            listen_lin.setVisibility(View.INVISIBLE);
+            speak_lin.setVisibility(View.INVISIBLE);
+            mic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mic.setVisibility(View.INVISIBLE);
+                    press_text.setVisibility(View.INVISIBLE);
+                    listen_lin.setVisibility(View.VISIBLE);
+
+                    speechRecognizer.setRecognitionListener(new RecognitionListener() {
                         @Override
-                        public void onClick(View v) {
-                            mic.setVisibility(View.INVISIBLE);
-                            press_text.setVisibility(View.INVISIBLE);
-                            listen_lin.setVisibility(View.VISIBLE);
+                        public void onReadyForSpeech(Bundle bundle) {
+                        }
 
-                            speechRecognizer.setRecognitionListener(new RecognitionListener() {
-                                @Override
-                                public void onReadyForSpeech(Bundle bundle) {
-                                }
+                        @Override
+                        public void onBeginningOfSpeech() {
+                        }
 
-                                @Override
-                                public void onBeginningOfSpeech() {
-                                }
+                        @Override
+                        public void onRmsChanged(float v) {
+                        }
 
-                                @Override
-                                public void onRmsChanged(float v) {
-                                }
+                        @Override
+                        public void onBufferReceived(byte[] bytes) {
+                        }
 
-                                @Override
-                                public void onBufferReceived(byte[] bytes) {
-                                }
+                        @Override
+                        public void onEndOfSpeech() {
+                        }
 
-                                @Override
-                                public void onEndOfSpeech() {
-                                }
+                        @Override
+                        public void onError(int errorCode) {
+                            if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
+                                handleSpeechRecognizerError(errorCode);
+                            } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
+                                handleSpeechRecognizerError(errorCode);
+                            }
+                        }
 
-                                @Override
-                                public void onError(int errorCode) {
-                                    if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
-                                        handleSpeechRecognizerError(errorCode);
-                                    } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
-                                        handleSpeechRecognizerError(errorCode);
-                                    }
-                                }
+                        @Override
+                        public void onResults(Bundle bundle) {
+                            iv_mic.setImageResource(R.drawable.mic_button);
+                            ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                            tv_Speech_to_text.setText(data.get(0));
 
-                                @Override
-                                public void onResults(Bundle bundle) {
-                                    iv_mic.setImageResource(R.drawable.mic_button);
-                                    ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                                    tv_Speech_to_text.setText(data.get(0));
+                            //calling the functions
+                            sendingAns(String.valueOf(data.get(0)), selectedLanguage);
 
-                                    //calling the functions
-                                    sendingAns(String.valueOf(data.get(0)), selectedLanguage);
+                        }
 
-                                }
+                        @Override
+                        public void onPartialResults(Bundle bundle) {
 
-                                @Override
-                                public void onPartialResults(Bundle bundle) {
+                        }
 
-                                }
+                        @Override
+                        public void onEvent(int i, Bundle bundle) {
 
-                                @Override
-                                public void onEvent(int i, Bundle bundle) {
-
-                                }
-                            });
                         }
                     });
                 }
-            }, 12000);
+            });
         }
     }
 
@@ -649,7 +677,8 @@ public class Push_TalkActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    mic.setVisibility(View.INVISIBLE);
+                    mic.setVisibility(View.VISIBLE);
+                    press_text.setVisibility(View.VISIBLE);
                     err_speech.setVisibility(View.INVISIBLE);
                     listen_lin.setVisibility(View.INVISIBLE);
                     speak_lin.setVisibility(View.INVISIBLE);
@@ -721,6 +750,77 @@ public class Push_TalkActivity extends AppCompatActivity {
             network_err.setVisibility(View.VISIBLE);
             listen_lin.setVisibility(View.INVISIBLE);
             speak_lin.setVisibility(View.INVISIBLE);
+
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mic.setVisibility(View.VISIBLE);
+                    press_text.setVisibility(View.VISIBLE);
+                    network_err.setVisibility(View.INVISIBLE);
+                    listen_lin.setVisibility(View.INVISIBLE);
+                    speak_lin.setVisibility(View.INVISIBLE);
+                    mic.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mic.setVisibility(View.INVISIBLE);
+                            press_text.setVisibility(View.INVISIBLE);
+                            listen_lin.setVisibility(View.VISIBLE);
+
+                            speechRecognizer.setRecognitionListener(new RecognitionListener() {
+                                @Override
+                                public void onReadyForSpeech(Bundle bundle) {
+                                }
+
+                                @Override
+                                public void onBeginningOfSpeech() {
+                                }
+
+                                @Override
+                                public void onRmsChanged(float v) {
+                                }
+
+                                @Override
+                                public void onBufferReceived(byte[] bytes) {
+                                }
+
+                                @Override
+                                public void onEndOfSpeech() {
+                                }
+
+                                @Override
+                                public void onError(int errorCode) {
+                                    if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
+                                        handleSpeechRecognizerError(errorCode);
+                                    } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
+                                        handleSpeechRecognizerError(errorCode);
+                                    }
+                                }
+
+                                @Override
+                                public void onResults(Bundle bundle) {
+                                    iv_mic.setImageResource(R.drawable.mic_button);
+                                    ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                                    tv_Speech_to_text.setText(data.get(0));
+
+                                    //calling the functions
+                                    sendingAns(String.valueOf(data.get(0)), selectedLanguage);
+
+                                }
+
+                                @Override
+                                public void onPartialResults(Bundle bundle) {
+
+                                }
+
+                                @Override
+                                public void onEvent(int i, Bundle bundle) {
+
+                                }
+                            });
+                        }
+                    });
+                }
+            }, 5000);
         }
 
     }
