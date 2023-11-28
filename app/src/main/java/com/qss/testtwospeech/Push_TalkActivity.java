@@ -58,8 +58,6 @@ public class Push_TalkActivity extends AppCompatActivity {
     private String textlang;
     private LinearLayout listen_lin;
     private LinearLayout speak_lin;
-    private LinearLayout err_speech;
-    private LinearLayout network_err;
     Handler handler = new Handler();
     private static final int REQUEST_CODE_SPEECH_INPUT = 1;
     LanguageManager lang = new LanguageManager(this);
@@ -81,9 +79,8 @@ public class Push_TalkActivity extends AppCompatActivity {
         mic = findViewById(R.id.mic);
         load = findViewById(R.id.load);
         headphone = findViewById(R.id.headphone_speak);
+
         //linear layout
-        err_speech = findViewById(R.id.err_speech);
-        network_err = findViewById(R.id.network_err);
         listen_lin = findViewById(R.id.listen_lin);
         speak_lin = findViewById(R.id.speak_lin);
 
@@ -416,14 +413,13 @@ public class Push_TalkActivity extends AppCompatActivity {
                                 sendingAns(String.valueOf(data.get(0)), selectedLanguage);
 
                                 // Hide the error linear layout
-                                err_speech.setVisibility(View.INVISIBLE);
                                 listen_lin.setVisibility(View.INVISIBLE);
                                 speak_lin.setVisibility(View.INVISIBLE);
 
                             } else {
 
                                 // Show the error linear layout
-                                network_err.setVisibility(View.VISIBLE);
+//                                network_err.setVisibility(View.VISIBLE);
                                 listen_lin.setVisibility(View.INVISIBLE);
                                 speak_lin.setVisibility(View.INVISIBLE);
                             }
@@ -667,7 +663,7 @@ public class Push_TalkActivity extends AppCompatActivity {
     private void handleSpeechRecognizerError(int errorCode) {
         if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
             // Reactivate the microphone button or enable any necessary UI elements
-            err_speech.setVisibility(View.VISIBLE);
+//            err_speech.setVisibility(View.VISIBLE);
             listen_lin.setVisibility(View.INVISIBLE);
             speak_lin.setVisibility(View.INVISIBLE);
 
@@ -676,7 +672,7 @@ public class Push_TalkActivity extends AppCompatActivity {
                 public void run() {
                     mic.setVisibility(View.VISIBLE);
                     press_text.setVisibility(View.VISIBLE);
-                    err_speech.setVisibility(View.INVISIBLE);
+//                    err_speech.setVisibility(View.INVISIBLE);
                     listen_lin.setVisibility(View.INVISIBLE);
                     speak_lin.setVisibility(View.INVISIBLE);
                     mic.setOnClickListener(new View.OnClickListener() {
@@ -744,7 +740,7 @@ public class Push_TalkActivity extends AppCompatActivity {
 
         } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
             // Reactivate the microphone button or enable any necessary UI elements
-            network_err.setVisibility(View.VISIBLE);
+//            network_err.setVisibility(View.VISIBLE);
             listen_lin.setVisibility(View.INVISIBLE);
             speak_lin.setVisibility(View.INVISIBLE);
 
@@ -753,7 +749,7 @@ public class Push_TalkActivity extends AppCompatActivity {
                 public void run() {
                     mic.setVisibility(View.VISIBLE);
                     press_text.setVisibility(View.VISIBLE);
-                    network_err.setVisibility(View.INVISIBLE);
+//                    network_err.setVisibility(View.INVISIBLE);
                     listen_lin.setVisibility(View.INVISIBLE);
                     speak_lin.setVisibility(View.INVISIBLE);
                     mic.setOnClickListener(new View.OnClickListener() {
