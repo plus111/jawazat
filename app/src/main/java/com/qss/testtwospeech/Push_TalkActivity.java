@@ -198,7 +198,6 @@ public class Push_TalkActivity extends AppCompatActivity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP){
                     speechRecognizer.stopListening();
-
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
                     iv_mic.setImageResource(R.drawable.mic_button);
@@ -363,11 +362,12 @@ public class Push_TalkActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    mic.setEnabled(true);
+                    iv_mic.setEnabled(true);
 
                 }
             }, 9000);
-            mic.setEnabled(false);
+
+            iv_mic.setEnabled(false);
             press_text.setVisibility(View.VISIBLE);
             mic.setVisibility(View.VISIBLE);
             listen_lin.setVisibility(View.INVISIBLE);
@@ -449,11 +449,11 @@ public class Push_TalkActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    mic.setEnabled(true);
+                    iv_mic.setEnabled(true);
                 }
             }, 10000);
 
-            mic.setEnabled(false);
+            iv_mic.setEnabled(false);
             press_text.setVisibility(View.VISIBLE);
             mic.setVisibility(View.VISIBLE);
             listen_lin.setVisibility(View.INVISIBLE);
@@ -523,11 +523,11 @@ public class Push_TalkActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    mic.setEnabled(true);
+                    iv_mic.setEnabled(true);
                 }
             }, 11000);
 
-            mic.setEnabled(false);
+            iv_mic.setEnabled(false);
             mic.setVisibility(View.VISIBLE);
             press_text.setVisibility(View.VISIBLE);
             listen_lin.setVisibility(View.INVISIBLE);
@@ -597,10 +597,10 @@ public class Push_TalkActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    mic.setEnabled(true);
+                    iv_mic.setEnabled(true);
                 }
             }, 12000);
-            mic.setEnabled(false);
+            iv_mic.setEnabled(false);
             mic.setVisibility(View.VISIBLE);
             listen_lin.setVisibility(View.INVISIBLE);
             speak_lin.setVisibility(View.INVISIBLE);

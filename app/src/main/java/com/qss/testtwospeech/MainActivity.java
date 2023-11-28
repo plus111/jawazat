@@ -153,8 +153,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-
-
             // url to post our data
             String url = "http://conversation.qltyss.com/sentence";
             RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
