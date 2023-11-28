@@ -244,12 +244,9 @@ public class Push_TalkActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            headphone.setVisibility(View.INVISIBLE);
-                            listen_textt.setVisibility(View.INVISIBLE);
+                            listen_lin.setVisibility(View.INVISIBLE);
+                            speak_lin.setVisibility(View.VISIBLE);
 
-                            speak.setVisibility(View.VISIBLE);
-                            speak_textt.setVisibility(View.VISIBLE);
-                            answerText.setVisibility(View.VISIBLE);
                             answerText.setText(response);
                             Log.d("SuccessResponse", "onResponse: ");
                             // Delayed visibility change after 3 seconds
@@ -258,7 +255,7 @@ public class Push_TalkActivity extends AppCompatActivity {
                                 public void run() {
                                     // Set visibility back to invisible after 3 seconds
                                     mic.setVisibility(View.VISIBLE);
-                                    press_text.setVisibility(View.INVISIBLE);
+                                    press_text.setVisibility(View.VISIBLE);
 
                                 }
                             }, 10000); //  10 seconds
