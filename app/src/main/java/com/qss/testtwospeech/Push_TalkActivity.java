@@ -434,7 +434,7 @@ public class Push_TalkActivity extends AppCompatActivity {
                         public void onClick(View v) {
                             mic.setVisibility(View.VISIBLE);
                             press_text.setVisibility(View.INVISIBLE);
-                            listen_lin.setVisibility(View.VISIBLE);
+                            listen_lin.setVisibility(View.INVISIBLE);
 
                             speechRecognizer.setRecognitionListener(new RecognitionListener() {
                                 @Override
