@@ -58,13 +58,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // url to post our data
-                String url = "http://192.168.100.67:5000/sentence";
+                String url = "http://conversation.qltyss.com/sentence";
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
                 // Move to another page using Intent
                 Intent intent = new Intent(MainActivity.this, Push_TalkActivity.class);
                 intent.putExtra("langg","en-US");
                 intent.putExtra("textlang","en");
+                intent.putExtra("pushtalk","MainActivity");
                 startActivity(intent);
 
                 StringRequest request = new StringRequest(
@@ -114,13 +115,14 @@ public class MainActivity extends AppCompatActivity {
 
 
                 // url to post our data
-                String url = "http://192.168.100.67:5000/sentence";
+                String url = "http://conversation.qltyss.com/sentence";
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
                 // Move to another page using Intent
                 Intent intent = new Intent(MainActivity.this, Push_TalkActivity.class);
                 intent.putExtra("langg","ar-SA");
                 intent.putExtra("textlang","ar");
+                intent.putExtra("pushtalk","MainActivity");
                 startActivity(intent);
                 StringRequest request = new StringRequest(
                         Request.Method.POST,
@@ -168,13 +170,14 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             // url to post our data
-            String url = "http://192.168.100.67:5000/sentence";
+            String url = "http://conversation.qltyss.com/sentence";
             RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
             // Move to another page using Intent
             Intent intent = new Intent(MainActivity.this, Push_TalkActivity.class);
             intent.putExtra("langg","fr-FR");
             intent.putExtra("textlang","fr");
+            intent.putExtra("pushtalk","MainActivity");
 
             startActivity(intent);
 
@@ -226,13 +229,14 @@ public class MainActivity extends AppCompatActivity {
 
 
             // url to post our data
-            String url = "http://192.168.100.67:5000/sentence";
+            String url = "http://conversation.qltyss.com/sentence";
             RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
             // Move to another page using Intent
             Intent intent = new Intent(MainActivity.this, Push_TalkActivity.class);
             intent.putExtra("langg","zh-tw");
             intent.putExtra("textlang","zh");
+            intent.putExtra("pushtalk","MainActivity");
             startActivity(intent);
 
             StringRequest request = new StringRequest(

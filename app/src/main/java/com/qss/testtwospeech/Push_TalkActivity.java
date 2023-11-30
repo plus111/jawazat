@@ -61,7 +61,6 @@ public class Push_TalkActivity extends AppCompatActivity {
     public int errorCode;
     Handler handler = new Handler();
     private static final int REQUEST_CODE_SPEECH_INPUT = 1;
-    LanguageManager lang = new LanguageManager(this);
     String selectedLanguage;
 
 
@@ -113,7 +112,93 @@ public class Push_TalkActivity extends AppCompatActivity {
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, selectedLanguage);
         Log.d("speechRecognizerIntent", "speechRecognizerIntent: " + speechRecognizerIntent);
 
-        timerbtn(textlang);
+
+
+        if (getIntent().getExtras().getString("pushtalk").equals("pushtalk")){
+
+            iv_mic.setEnabled(true);
+//            mic.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    listen_lin.setVisibility(View.VISIBLE);
+//                    mic.setVisibility(View.INVISIBLE);
+//                    press_text.setVisibility(View.INVISIBLE);
+//
+//                    speechRecognizer.setRecognitionListener(new RecognitionListener() {
+//                        @Override
+//                        public void onReadyForSpeech(Bundle bundle) {
+//                        }
+//
+//                        @Override
+//                        public void onBeginningOfSpeech() {
+//                        }
+//
+//                        @Override
+//                        public void onRmsChanged(float v) {
+//                        }
+//
+//                        @Override
+//                        public void onBufferReceived(byte[] bytes) {
+//                        }
+//
+//                        @Override
+//                        public void onEndOfSpeech() {
+//                            load.setVisibility(View.VISIBLE);
+//                            listen_lin.setVisibility(View.INVISIBLE);
+//                        }
+//
+//                        @Override
+//                        public void onError(int errorCode) {
+//                            handleSpeechRecognizerError(errorCode);
+//                        }
+//
+//                        @Override
+//                        public void onResults(Bundle bundle) {
+////                            iv_mic.setImageResource(R.drawable.mic_button);
+//
+//                            ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+//
+//                            if (data != null && !data.isEmpty()) {
+//                                // Recognized speech is not empty
+//                                tv_Speech_to_text.setText(data.get(0));
+//                                sendingAns(String.valueOf(data.get(0)), selectedLanguage);
+//                                load.setVisibility(View.INVISIBLE);
+//                                iv_mic.setVisibility(View.VISIBLE);
+//
+//                            } else if (data == null || data.isEmpty()) {
+//                                // Handle the scenario when there is no recognized speech
+////                                handleSpeechRecognizerError(errorCode);
+//
+//                            } else {
+//                                // Handle other scenarios, such as the network error
+//                                if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
+//                                    // Handle the network error
+//                                }
+//                            }
+//
+//                        }
+//
+//
+//
+//
+//                        @Override
+//                        public void onPartialResults(Bundle bundle) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onEvent(int i, Bundle bundle) {
+//
+//                        }
+//                    });
+//                }
+//            });
+
+            timerbtn(textlang);
+        }else {
+
+            timerbtn(textlang);
+        }
 
 
 
@@ -198,7 +283,7 @@ public class Push_TalkActivity extends AppCompatActivity {
 
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
-                    iv_mic.setImageResource(R.drawable.mic_button);
+//                    iv_mic.setImageResource(R.drawable.mic_button);
                     speechRecognizer.startListening(speechRecognizerIntent);
                 }
                 return false;
@@ -231,7 +316,7 @@ public class Push_TalkActivity extends AppCompatActivity {
 
     public void sendingAns(String tv_Speech_to_text,String selectedLanguage){
 
-        String url = "http://192.168.100.67:5000/sentence";
+        String url = "http://conversation.qltyss.com/sentence";
         RequestQueue queue = Volley.newRequestQueue(Push_TalkActivity.this);
 
         StringRequest request = new StringRequest(
@@ -253,6 +338,7 @@ public class Push_TalkActivity extends AppCompatActivity {
                                 public void run() {
                                     // Set visibility back to invisible after 10 seconds
                                     mic.setVisibility(View.VISIBLE);
+                                    iv_mic.setVisibility(View.VISIBLE);
                                     press_text.setVisibility(View.VISIBLE);
                                     speak_lin.setVisibility(View.INVISIBLE);
                                     listen_lin.setVisibility(View.INVISIBLE);
@@ -370,8 +456,6 @@ public class Push_TalkActivity extends AppCompatActivity {
                                 public void onBeginningOfSpeech() {
                                 }
 
-
-
                                 @Override
                                 public void onRmsChanged(float v) {
                                 }
@@ -388,13 +472,14 @@ public class Push_TalkActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onError(int errorCode) {
+
+                                    Log.d("handleSpeechRecognizer", "handleSpeechRecognizer: " + errorCode);
                                     handleSpeechRecognizerError(errorCode);
                                 }
 
                                 @Override
                                 public void onResults(Bundle bundle) {
-                                    iv_mic.setImageResource(R.drawable.mic_button);
-
+//                                    iv_mic.setImageResource(R.drawable.mic_button);
                                     ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
                                     if (data != null && !data.isEmpty()) {
@@ -402,20 +487,23 @@ public class Push_TalkActivity extends AppCompatActivity {
                                         tv_Speech_to_text.setText(data.get(0));
                                         sendingAns(String.valueOf(data.get(0)), selectedLanguage);
                                         load.setVisibility(View.INVISIBLE);
-                                        iv_mic.setVisibility(View.VISIBLE);
 
+
+                                    } else if (data == null || data.isEmpty()) {
+                                        // Handle the scenario when there is no recognized speech
+//                                        handleSpeechRecognizerError(errorCode);
 
                                     } else {
+                                        // Handle other scenarios, such as the network error
                                         if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
-
-                                        } else {
-                                            // Show speech recognition error layout
-//                                          err_speech.setVisibility(View.VISIBLE);
-
+                                            // Handle the network error
+                                        }
                                     }
 
-                                    }
                                 }
+
+
+
 
                                 @Override
                                 public void onPartialResults(Bundle bundle) {
@@ -457,8 +545,6 @@ public class Push_TalkActivity extends AppCompatActivity {
                                 public void onBeginningOfSpeech() {
                                 }
 
-
-
                                 @Override
                                 public void onRmsChanged(float v) {
                                 }
@@ -475,16 +561,12 @@ public class Push_TalkActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onError(int errorCode) {
-                                    if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
-                                        handleSpeechRecognizerError(errorCode);
-                                    } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
-                                        handleSpeechRecognizerError(errorCode);
-                                    }
+                                    handleSpeechRecognizerError(errorCode);
                                 }
 
                                 @Override
                                 public void onResults(Bundle bundle) {
-                                    iv_mic.setImageResource(R.drawable.mic_button);
+//                                    iv_mic.setImageResource(R.drawable.mic_button);
 
                                     ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
@@ -495,18 +577,21 @@ public class Push_TalkActivity extends AppCompatActivity {
                                         load.setVisibility(View.INVISIBLE);
                                         iv_mic.setVisibility(View.VISIBLE);
 
+                                    } else if (data == null || data.isEmpty()) {
+                                        // Handle the scenario when there is no recognized speech
+//                                        handleSpeechRecognizerError(errorCode);
 
                                     } else {
+                                        // Handle other scenarios, such as the network error
                                         if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
-
-                                        } else {
-                                            // Show speech recognition error layout
-//                                        err_speech.setVisibility(View.VISIBLE);
-
+                                            // Handle the network error
                                         }
-
                                     }
+
                                 }
+
+
+
 
                                 @Override
                                 public void onPartialResults(Bundle bundle) {
@@ -547,8 +632,6 @@ public class Push_TalkActivity extends AppCompatActivity {
                                 public void onBeginningOfSpeech() {
                                 }
 
-
-
                                 @Override
                                 public void onRmsChanged(float v) {
                                 }
@@ -565,16 +648,12 @@ public class Push_TalkActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onError(int errorCode) {
-                                    if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
-                                        handleSpeechRecognizerError(errorCode);
-                                    } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
-                                        handleSpeechRecognizerError(errorCode);
-                                    }
+                                    handleSpeechRecognizerError(errorCode);
                                 }
 
                                 @Override
                                 public void onResults(Bundle bundle) {
-                                    iv_mic.setImageResource(R.drawable.mic_button);
+//                                    iv_mic.setImageResource(R.drawable.mic_button);
 
                                     ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
@@ -585,18 +664,21 @@ public class Push_TalkActivity extends AppCompatActivity {
                                         load.setVisibility(View.INVISIBLE);
                                         iv_mic.setVisibility(View.VISIBLE);
 
+                                    } else if (data == null || data.isEmpty()) {
+                                        // Handle the scenario when there is no recognized speech
+//                                        handleSpeechRecognizerError(errorCode);
 
                                     } else {
+                                        // Handle other scenarios, such as the network error
                                         if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
-
-                                        } else {
-                                            // Show speech recognition error layout
-//                                        err_speech.setVisibility(View.VISIBLE);
-
+                                            // Handle the network error
                                         }
-
                                     }
+
                                 }
+
+
+
 
                                 @Override
                                 public void onPartialResults(Bundle bundle) {
@@ -636,8 +718,6 @@ public class Push_TalkActivity extends AppCompatActivity {
                                 public void onBeginningOfSpeech() {
                                 }
 
-
-
                                 @Override
                                 public void onRmsChanged(float v) {
                                 }
@@ -654,16 +734,13 @@ public class Push_TalkActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onError(int errorCode) {
-                                    if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
-                                        handleSpeechRecognizerError(errorCode);
-                                    } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
-                                        handleSpeechRecognizerError(errorCode);
-                                    }
+                                    Log.d( "handleSpeechRecognizer", " handleSpeechRecognizer: " +  errorCode);
+                                    handleSpeechRecognizerError(errorCode);
                                 }
 
                                 @Override
                                 public void onResults(Bundle bundle) {
-                                    iv_mic.setImageResource(R.drawable.mic_button);
+//                                    iv_mic.setImageResource(R.drawable.mic_button);
 
                                     ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
@@ -674,18 +751,21 @@ public class Push_TalkActivity extends AppCompatActivity {
                                         load.setVisibility(View.INVISIBLE);
                                         iv_mic.setVisibility(View.VISIBLE);
 
+                                    } else if (data == null || data.isEmpty()) {
+                                        // Handle the scenario when there is no recognized speech
+//                                        handleSpeechRecognizerError(errorCode);
 
                                     } else {
+                                        // Handle other scenarios, such as the network error
                                         if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
-
-                                        } else {
-                                            // Show speech recognition error layout
-//                                        err_speech.setVisibility(View.VISIBLE);
-
+//                                            handleSpeechRecognizerError(errorCode);
                                         }
-
                                     }
+
                                 }
+
+
+
 
                                 @Override
                                 public void onPartialResults(Bundle bundle) {
@@ -706,20 +786,20 @@ public class Push_TalkActivity extends AppCompatActivity {
     }
 
     private void handleSpeechRecognizerError(int errorCode) {
-        String errorMessage;
-        if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
-            errorMessage = "Speech Timeout Error";
+        String errorMessage = " ";
+        if (errorCode == SpeechRecognizer.ERROR_NO_MATCH  && errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
+            errorMessage = "Speech Timeout Error ";
         } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
             errorMessage = "Network Error";
         } else {
-            // Handle other error codes if needed
-            errorMessage = "Unknown Error";
+
         }
+
 
         Intent intent = new Intent(Push_TalkActivity.this, Error_Activity.class);
         intent.putExtra("error_message", errorMessage);
-        startActivity(intent);
         finish();
+        startActivity(intent);
 
     }
 }
