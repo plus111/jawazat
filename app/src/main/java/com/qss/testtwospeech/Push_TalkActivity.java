@@ -231,7 +231,7 @@ public class Push_TalkActivity extends AppCompatActivity {
 
     public void sendingAns(String tv_Speech_to_text,String selectedLanguage){
 
-        String url = "http://conversation.qltyss.com/sentence";
+        String url = "http://192.168.100.67:5000/sentence";
         RequestQueue queue = Volley.newRequestQueue(Push_TalkActivity.this);
 
         StringRequest request = new StringRequest(
@@ -357,9 +357,9 @@ public class Push_TalkActivity extends AppCompatActivity {
                     mic.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            listen_lin.setVisibility(View.VISIBLE);
                             mic.setVisibility(View.INVISIBLE);
                             press_text.setVisibility(View.INVISIBLE);
-                            listen_lin.setVisibility(View.VISIBLE);
 
                             speechRecognizer.setRecognitionListener(new RecognitionListener() {
                                 @Override
@@ -388,11 +388,7 @@ public class Push_TalkActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onError(int errorCode) {
-                                    if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
-                                        handleSpeechRecognizerError(errorCode);
-                                    } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
-                                        handleSpeechRecognizerError(errorCode);
-                                    }
+                                    handleSpeechRecognizerError(errorCode);
                                 }
 
                                 @Override
@@ -412,9 +408,9 @@ public class Push_TalkActivity extends AppCompatActivity {
                                     } else {
                                         if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
 
-                                    } else {
-                                        // Show speech recognition error layout
-//                                        err_speech.setVisibility(View.VISIBLE);
+                                        } else {
+                                            // Show speech recognition error layout
+//                                          err_speech.setVisibility(View.VISIBLE);
 
                                     }
 
@@ -710,158 +706,20 @@ public class Push_TalkActivity extends AppCompatActivity {
     }
 
     private void handleSpeechRecognizerError(int errorCode) {
+        String errorMessage;
         if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
-            Intent intent = new Intent(Push_TalkActivity.this,Error_Activity.class);
-            startActivity(intent);
-            finish();
-
-//            handler.postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    mic.setVisibility(View.VISIBLE);
-//                    press_text.setVisibility(View.VISIBLE);
-////                    err_speech.setVisibility(View.INVISIBLE);
-//                    listen_lin.setVisibility(View.INVISIBLE);
-//                    speak_lin.setVisibility(View.INVISIBLE);
-//                    mic.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            mic.setVisibility(View.INVISIBLE);
-//                            press_text.setVisibility(View.INVISIBLE);
-//                            listen_lin.setVisibility(View.VISIBLE);
-//
-//                            speechRecognizer.setRecognitionListener(new RecognitionListener() {
-//                                @Override
-//                                public void onReadyForSpeech(Bundle bundle) {
-//                                }
-//
-//                                @Override
-//                                public void onBeginningOfSpeech() {
-//                                }
-//
-//                                @Override
-//                                public void onRmsChanged(float v) {
-//                                }
-//
-//                                @Override
-//                                public void onBufferReceived(byte[] bytes) {
-//                                }
-//
-//                                @Override
-//                                public void onEndOfSpeech() {
-//                                }
-//
-//                                @Override
-//                                public void onError(int errorCode) {
-//                                    if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
-//                                        handleSpeechRecognizerError(errorCode);
-//                                    } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
-//                                        handleSpeechRecognizerError(errorCode);
-//                                    }
-//                                }
-//
-//                                @Override
-//                                public void onResults(Bundle bundle) {
-//                                    iv_mic.setImageResource(R.drawable.mic_button);
-//                                    ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-//                                    tv_Speech_to_text.setText(data.get(0));
-//
-//                                    //calling the functions
-//                                    sendingAns(String.valueOf(data.get(0)), selectedLanguage);
-//
-//                                }
-//
-//                                @Override
-//                                public void onPartialResults(Bundle bundle) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onEvent(int i, Bundle bundle) {
-//
-//                                }
-//                            });
-//                        }
-//                    });
-//                }
-//            }, 5000);
-
+            errorMessage = "Speech Timeout Error";
         } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
-            Intent intent = new Intent(Push_TalkActivity.this,Error_Activity.class);
-            startActivity(intent);
-            finish();
-
-//            handler.postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    mic.setVisibility(View.VISIBLE);
-//                    press_text.setVisibility(View.VISIBLE);
-////                    network_err.setVisibility(View.INVISIBLE);
-//                    listen_lin.setVisibility(View.INVISIBLE);
-//                    speak_lin.setVisibility(View.INVISIBLE);
-//                    mic.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            mic.setVisibility(View.INVISIBLE);
-//                            press_text.setVisibility(View.INVISIBLE);
-//                            listen_lin.setVisibility(View.VISIBLE);
-//
-//                            speechRecognizer.setRecognitionListener(new RecognitionListener() {
-//                                @Override
-//                                public void onReadyForSpeech(Bundle bundle) {
-//                                }
-//
-//                                @Override
-//                                public void onBeginningOfSpeech() {
-//                                }
-//
-//                                @Override
-//                                public void onRmsChanged(float v) {
-//                                }
-//
-//                                @Override
-//                                public void onBufferReceived(byte[] bytes) {
-//                                }
-//
-//                                @Override
-//                                public void onEndOfSpeech() {
-//                                }
-//
-//                                @Override
-//                                public void onError(int errorCode) {
-//                                    if (errorCode == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
-//                                        handleSpeechRecognizerError(errorCode);
-//                                    } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
-//                                        handleSpeechRecognizerError(errorCode);
-//                                    }
-//                                }
-//
-//                                @Override
-//                                public void onResults(Bundle bundle) {
-//                                    iv_mic.setImageResource(R.drawable.mic_button);
-//                                    ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-//                                    tv_Speech_to_text.setText(data.get(0));
-//
-//                                    //calling the functions
-//                                    sendingAns(String.valueOf(data.get(0)), selectedLanguage);
-//
-//                                }
-//
-//                                @Override
-//                                public void onPartialResults(Bundle bundle) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onEvent(int i, Bundle bundle) {
-//
-//                                }
-//                            });
-//                        }
-//                    });
-//                }
-//            }, 5000);
+            errorMessage = "Network Error";
+        } else {
+            // Handle other error codes if needed
+            errorMessage = "Unknown Error";
         }
+
+        Intent intent = new Intent(Push_TalkActivity.this, Error_Activity.class);
+        intent.putExtra("error_message", errorMessage);
+        startActivity(intent);
+        finish();
 
     }
 }

@@ -2,6 +2,7 @@ package com.qss.testtwospeech;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import android.content.Intent;
@@ -24,28 +25,40 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button quit_btn;
     Button Englishbtn;
     Button Arabicbtn;
     Button Frenchbtn;
     Button Chinesebtn;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        quit_btn = findViewById(R.id.quit_bttn );
         Englishbtn = findViewById(R.id.lang_englishbtn);
         Arabicbtn = findViewById(R.id.lang_Arabicbtn);
         Frenchbtn = findViewById(R.id.lang_Frenchbtn);
         Chinesebtn = findViewById(R.id.lang_chinesebtn);
 
 
+        quit_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // to close the app
+                finish();
+                System.exit(0);
+
+            }
+        });
         Englishbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 // url to post our data
-                String url = "http://conversation.qltyss.com/sentence";
+                String url = "http://192.168.100.67:5000/sentence";
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
                 // Move to another page using Intent
@@ -91,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 };
 
                 queue.add(request);
-
+                finish();
             }
 
         });
@@ -101,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 // url to post our data
-                String url = "http://conversation.qltyss.com/sentence";
+                String url = "http://192.168.100.67:5000/sentence";
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
                 // Move to another page using Intent
@@ -146,15 +159,16 @@ public class MainActivity extends AppCompatActivity {
                 };
 
                 queue.add(request);
-
+                finish();
             }
+
         });
         Frenchbtn.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
             // url to post our data
-            String url = "http://conversation.qltyss.com/sentence";
+            String url = "http://192.168.100.67:5000/sentence";
             RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
             // Move to another page using Intent
@@ -201,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
             };
 
             queue.add(request);
+            finish();
 
 
             }
@@ -211,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             // url to post our data
-            String url = "http://conversation.qltyss.com/sentence";
+            String url = "http://192.168.100.67:5000/sentence";
             RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
             // Move to another page using Intent
@@ -257,6 +272,7 @@ public class MainActivity extends AppCompatActivity {
             };
 
             queue.add(request);
+            finish();
 
             }
 
