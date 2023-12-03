@@ -93,6 +93,7 @@ public class Push_TalkActivity extends AppCompatActivity {
 
         if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
             checkPermission();
+
         }
 
 
@@ -288,6 +289,8 @@ public class Push_TalkActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        micTimer();
     }
 
     @Override
@@ -782,5 +785,38 @@ public class Push_TalkActivity extends AppCompatActivity {
         finish();
         startActivity(intent);
 
+    }
+
+    public void micTimer(){
+        // url to post our data
+        String url = "http://conversation.qltyss.com/sentence";
+        RequestQueue queue = Volley.newRequestQueue(Push_TalkActivity.this);
+
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                url,
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Handle response
+                        Log.d("TAG", "onResponse: ");
+                        // Set visibility back to invisible after 15 seconds
+                        mic.setVisibility(View.VISIBLE);
+                        iv_mic.setVisibility(View.VISIBLE);
+                        press_text.setVisibility(View.VISIBLE);
+                        speak_lin.setVisibility(View.INVISIBLE);
+                        listen_lin.setVisibility(View.INVISIBLE);
+                        load.setVisibility(View.INVISIBLE);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle error
+                        Log.e("Error", "onErrorResponse: ", error);
+                    }
+                });
+
+        queue.add(request);
     }
 }
