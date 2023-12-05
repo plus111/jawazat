@@ -194,6 +194,7 @@ public class Push_TalkActivity extends AppCompatActivity {
 //                    });
 //                }
 //            });
+
             timerbtn(textlang);
         }else {
 
@@ -338,7 +339,7 @@ public class Push_TalkActivity extends AppCompatActivity {
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    // Set visibility back to invisible after 15 seconds
+                                    // Set visibility back to invisible after 10 seconds
                                     mic.setVisibility(View.VISIBLE);
                                     iv_mic.setVisibility(View.VISIBLE);
                                     press_text.setVisibility(View.VISIBLE);
@@ -347,7 +348,7 @@ public class Push_TalkActivity extends AppCompatActivity {
                                     load.setVisibility(View.INVISIBLE);
 
                                 }
-                            }, 15000); //  15 seconds
+                            }, 15000); //  10 seconds
 
 
                         } catch (Exception e) {
@@ -474,8 +475,9 @@ public class Push_TalkActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onError(int errorCode) {
-//                                    Log.d("handleSpeechRecognizer", "handleSpeechRecognizer: " + errorCode);
-//                                    handleSpeechRecognizerError(errorCode);
+
+                                    Log.d("handleSpeechRecognizer", "handleSpeechRecognizer: " + errorCode);
+                                    handleSpeechRecognizerError(errorCode);
                                 }
 
                                 @Override
@@ -495,8 +497,10 @@ public class Push_TalkActivity extends AppCompatActivity {
 //                                        handleSpeechRecognizerError(errorCode);
 
                                     } else {
-                                        handleSpeechRecognizerError(errorCode);
-
+                                        // Handle other scenarios, such as the network error
+                                        if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
+                                            // Handle the network error
+                                        }
                                     }
 
                                 }
@@ -518,6 +522,7 @@ public class Push_TalkActivity extends AppCompatActivity {
                     });
                 }
             }, 9000);
+
             iv_mic.setEnabled(false);
 
 
@@ -559,7 +564,7 @@ public class Push_TalkActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onError(int errorCode) {
-//                                    handleSpeechRecognizerError(errorCode);
+                                    handleSpeechRecognizerError(errorCode);
                                 }
 
                                 @Override
@@ -580,7 +585,10 @@ public class Push_TalkActivity extends AppCompatActivity {
 //                                        handleSpeechRecognizerError(errorCode);
 
                                     } else {
-                                        handleSpeechRecognizerError(errorCode);
+                                        // Handle other scenarios, such as the network error
+                                        if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
+                                            // Handle the network error
+                                        }
                                     }
 
                                 }
@@ -602,6 +610,7 @@ public class Push_TalkActivity extends AppCompatActivity {
                     });
                 }
             }, 10000);
+
             iv_mic.setEnabled(false);
 
 
@@ -642,7 +651,7 @@ public class Push_TalkActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onError(int errorCode) {
-//                                    handleSpeechRecognizerError(errorCode);
+                                    handleSpeechRecognizerError(errorCode);
                                 }
 
                                 @Override
@@ -663,7 +672,10 @@ public class Push_TalkActivity extends AppCompatActivity {
 //                                        handleSpeechRecognizerError(errorCode);
 
                                     } else {
-                                        handleSpeechRecognizerError(errorCode);
+                                        // Handle other scenarios, such as the network error
+                                        if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
+                                            // Handle the network error
+                                        }
                                     }
 
                                 }
@@ -685,6 +697,7 @@ public class Push_TalkActivity extends AppCompatActivity {
                     });
                 }
             }, 11000);
+
             iv_mic.setEnabled(false);
 
         } else if (textlang.equals("zh")) {
@@ -724,8 +737,8 @@ public class Push_TalkActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onError(int errorCode) {
-//                                    Log.d( "handleSpeechRecognizer", " handleSpeechRecognizer: " +  errorCode);
-//                                    handleSpeechRecognizerError(errorCode);
+                                    Log.d( "handleSpeechRecognizer", " handleSpeechRecognizer: " +  errorCode);
+                                    handleSpeechRecognizerError(errorCode);
                                 }
 
                                 @Override
@@ -746,7 +759,10 @@ public class Push_TalkActivity extends AppCompatActivity {
 //                                        handleSpeechRecognizerError(errorCode);
 
                                     } else {
-                                        handleSpeechRecognizerError(errorCode);
+                                        // Handle other scenarios, such as the network error
+                                        if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
+//                                            handleSpeechRecognizerError(errorCode);
+                                        }
                                     }
 
                                 }
@@ -778,7 +794,10 @@ public class Push_TalkActivity extends AppCompatActivity {
             errorMessage = "Speech Timeout Error ";
         } else if (errorCode == SpeechRecognizer.ERROR_NETWORK) {
             errorMessage = "Network Error";
+        } else {
+
         }
+
 
         Intent intent = new Intent(Push_TalkActivity.this, Error_Activity.class);
         intent.putExtra("error_message", errorMessage);

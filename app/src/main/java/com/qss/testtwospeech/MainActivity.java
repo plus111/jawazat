@@ -1,21 +1,12 @@
 package com.qss.testtwospeech;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-
 import android.content.Intent;
-import android.speech.RecognizerIntent;
-import android.speech.SpeechRecognizer;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -25,263 +16,81 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button quit_btn;
-    Button Englishbtn;
-    Button Arabicbtn;
-    Button Frenchbtn;
-    Button Chinesebtn;
+    private Button quit_btn;
+    private Button Englishbtn;
+    private Button Arabicbtn;
+    private Button Frenchbtn;
+    private Button Chinesebtn;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        quit_btn = findViewById(R.id.quit_bttn );
+        quit_btn = findViewById(R.id.quit_bttn);
         Englishbtn = findViewById(R.id.lang_englishbtn);
         Arabicbtn = findViewById(R.id.lang_Arabicbtn);
         Frenchbtn = findViewById(R.id.lang_Frenchbtn);
         Chinesebtn = findViewById(R.id.lang_chinesebtn);
 
+        quit_btn.setOnClickListener(v -> finishAndExit());
 
-        quit_btn.setOnClickListener(new View.OnClickListener() {
+        Englishbtn.setOnClickListener(v -> startPushTalkActivity("en-US", "en", "MainActivity"));
+        Arabicbtn.setOnClickListener(v -> startPushTalkActivity("ar-SA", "ar", "MainActivity"));
+        Frenchbtn.setOnClickListener(v -> startPushTalkActivity("fr-FR", "fr", "MainActivity"));
+        Chinesebtn.setOnClickListener(v -> startPushTalkActivity("zh-tw", "zh", "MainActivity"));
+    }
+
+    private void finishAndExit() {
+        finish();
+        System.exit(0);
+    }
+
+    private void startPushTalkActivity(String lang, String textLang, String pushTalk) {
+        String url = "http://conversation.qltyss.com/sentence";
+
+        Intent intent = new Intent(MainActivity.this, Push_TalkActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("langg", lang);
+        bundle.putString("textlang", textLang);
+        bundle.putString("pushtalk", pushTalk);
+        intent.putExtras(bundle);
+
+        startActivity(intent);
+
+        performNetworkRequest(url, lang);
+    }
+
+    private void performNetworkRequest(String url, String lang) {
+        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                url,
+                response -> Log.d("TAG", "onResponse: "),
+                error -> Log.e("Error", "onErrorResponse: ", error)) {
             @Override
-            public void onClick(View v) {
-                // to close the app
-                finish();
-                System.exit(0);
-
+            public String getBodyContentType() {
+                return "application/json";
             }
-        });
-        Englishbtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
-
-                // url to post our data
-                String url = "http://conversation.qltyss.com/sentence";
-                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-
-                // Move to another page using Intent
-                Intent intent = new Intent(MainActivity.this, Push_TalkActivity.class);
-                intent.putExtra("langg","en-US");
-                intent.putExtra("textlang","en");
-                intent.putExtra("pushtalk","MainActivity");
-                startActivity(intent);
-
-                StringRequest request = new StringRequest(
-                        Request.Method.POST,
-                        url,
-                        new com.android.volley.Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                // Handle response
-                                Log.d("TAG", "onResponse: ");
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                // Handle error
-                                Log.e("Error", "onErrorResponse: ", error);
-                            }
-                        }) {
-                            @Override
-                            public String getBodyContentType() {
-                                Log.d("TAG", "getBodyContentType: ");
-                                return "application/json";
-                            }
-
-                            @Override
-                            public byte[] getBody() {
-                                JSONObject jsonBody = new JSONObject();
-                                try {
-                                    jsonBody.put("lang", "en-US");
-                                    jsonBody.put("sentence", "welcoming");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                return jsonBody.toString().getBytes();
-                            }
-                };
-
-                queue.add(request);
-                finish();
-            }
-
-        });
-        Arabicbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                // url to post our data
-                String url = "http://conversation.qltyss.com/sentence";
-                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-
-                // Move to another page using Intent
-                Intent intent = new Intent(MainActivity.this, Push_TalkActivity.class);
-                intent.putExtra("langg","ar-SA");
-                intent.putExtra("textlang","ar");
-                intent.putExtra("pushtalk","MainActivity");
-                startActivity(intent);
-                StringRequest request = new StringRequest(
-                        Request.Method.POST,
-                        url,
-                        new com.android.volley.Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                // Handle response
-                                Log.d("TAG", "onResponse: ");
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                // Handle error
-                                Log.e("Error", "onErrorResponse: ", error);
-                            }
-                        }) {
-                    @Override
-                    public String getBodyContentType() {
-                        Log.d("TAG", "getBodyContentType: ");
-                        return "application/json";
-                    }
-
-                    @Override
-                    public byte[] getBody() {
-                        JSONObject jsonBody = new JSONObject();
-                        try {
-                            jsonBody.put("lang", "ar-SA");
-                            jsonBody.put("sentence", "welcoming");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        return jsonBody.toString().getBytes();
-                    }
-                };
-
-                queue.add(request);
-                finish();
-            }
-
-        });
-        Frenchbtn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            // url to post our data
-            String url = "http://conversation.qltyss.com/sentence";
-            RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-
-            // Move to another page using Intent
-            Intent intent = new Intent(MainActivity.this, Push_TalkActivity.class);
-            intent.putExtra("langg","fr-FR");
-            intent.putExtra("textlang","fr");
-            intent.putExtra("pushtalk","MainActivity");
-
-            startActivity(intent);
-
-            StringRequest request = new StringRequest(
-                    Request.Method.POST,
-                    url,
-                    new com.android.volley.Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            // Handle response
-                            Log.d("TAG", "onResponse: ");
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            // Handle error
-                            Log.e("Error", "onErrorResponse: ", error);
-                        }
-                    }) {
-                @Override
-                public String getBodyContentType() {
-                    Log.d("TAG", "getBodyContentType: ");
-                    return "application/json";
+            public byte[] getBody() {
+                JSONObject jsonBody = new JSONObject();
+                try {
+                    jsonBody.put("lang", lang);
+                    jsonBody.put("sentence", "welcoming");
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-
-                @Override
-                public byte[] getBody() {
-                    JSONObject jsonBody = new JSONObject();
-                    try {
-                        jsonBody.put("lang", "fr-FR");
-                        jsonBody.put("sentence", "welcoming");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    return jsonBody.toString().getBytes();
-                }
-            };
-
-            queue.add(request);
-            finish();
-
-
+                return jsonBody.toString().getBytes();
             }
-        });
-        Chinesebtn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+        };
 
-
-            // url to post our data
-            String url = "http://conversation.qltyss.com/sentence";
-            RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-
-            // Move to another page using Intent
-            Intent intent = new Intent(MainActivity.this, Push_TalkActivity.class);
-            intent.putExtra("langg","zh-tw");
-            intent.putExtra("textlang","zh");
-            intent.putExtra("pushtalk","MainActivity");
-            startActivity(intent);
-
-            StringRequest request = new StringRequest(
-                    Request.Method.POST,
-                    url,
-                    new com.android.volley.Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            // Handle response
-                            Log.d("TAG", "onResponse: ");
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            // Handle error
-                            Log.e("Error", "onErrorResponse: ", error);
-                        }
-                    }) {
-                @Override
-                public String getBodyContentType() {
-                    Log.d("TAG", "getBodyContentType: ");
-                    return "application/json";
-                }
-
-                @Override
-                public byte[] getBody() {
-                    JSONObject jsonBody = new JSONObject();
-                    try {
-                        jsonBody.put("lang", "zh-tw");
-                        jsonBody.put("sentence", "welcoming");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    return jsonBody.toString().getBytes();
-                }
-            };
-
-            queue.add(request);
-            finish();
-
-            }
-
-        });
+        queue.add(request);
+        finish();
     }
 }
+
 
 
